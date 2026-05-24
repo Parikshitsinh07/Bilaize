@@ -1,14 +1,11 @@
-import React, { Suspense, useEffect, useMemo, useRef, useState, createContext, useContext } from "react"
+import React, { Suspense, useEffect, useMemo, useRef, createContext, useContext } from "react"
 import * as THREE from "three"
 import { Canvas, useFrame } from "@react-three/fiber"
 import {
   OrbitControls,
-  Environment,
   Html,
-  Plane,
-  Sphere,
+  Plane
 } from "@react-three/drei"
-import { Download, Heart, X } from "lucide-react"
 
 /**
  * Single-file Stellar Card Gallery
@@ -33,7 +30,6 @@ type CardContextType = {
 }
 
 const CardContext = createContext<CardContextType | undefined>(undefined)
-
 function useCard() {
   const ctx = useContext(CardContext)
   if (!ctx) throw new Error("useCard must be used within CardProvider")
@@ -382,7 +378,7 @@ function CardGalaxy() {
    Page/Component Export
    ========================= */
 
-export default function StellarCardGallerySingle() {
+export default function StellarCardGallerySingle({ onGalleryClick, onWorkClick }) {
   return (
     <CardProvider>
       <div className="w-full h-screen relative overflow-hidden bg-white">
@@ -417,6 +413,34 @@ export default function StellarCardGallerySingle() {
         </Canvas>
 
         {/* <CardModal /> */}
+        <nav style={{
+        position: "absolute",
+        top: "50%", left: 0, right: 0,
+        zIndex: 200,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "32px 40px",
+        pointerEvents: "none",
+      }}>
+        <div style={{ display: "flex", gap: "40px" }}>
+          <span className="nav-link" style={{ pointerEvents: "auto" }} onClick={onGalleryClick}>
+            GALLERY
+          </span>
+          <span className="nav-link" style={{ pointerEvents: "auto" }} onClick={onWorkClick}>
+            WORK
+          </span>
+        </div>
+
+        <span className="gallery-title" style={{ pointerEvents: "auto" }} onClick={onGalleryClick}>
+        Bilaize.
+        </span>
+
+        <div style={{ display: "flex", gap: "40px" }}>
+          <span className="nav-link" style={{ pointerEvents: "auto" }}>ABOUT</span>
+          <span className="nav-link" style={{ pointerEvents: "auto" }}>CONTACT</span>
+        </div>
+      </nav>
 
         {/* <div className="absolute top-4 left-4 z-20 text-white pointer-events-none">
           <h1 className="text-2xl font-bold mb-2">3D Stellar Card Gallery</h1>
