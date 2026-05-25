@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import StellarCardGallerySingle from './component/ui/StellarCardGallerySingle'
-import GalleryPage from './component/GalleryPage'
-import WorkPage from './component/WorkPage'
-import WorkDetailPage from './component/WorkDetailPage'
+import GalleryPage from './component/GalleryPage';
+import WorkPage from './component/WorkPage';
+import WorkDetailPage from './component/Workdetailpage';
+
 function App() {
   const [page, setPage] = useState("home");
   const [activeProject, setActiveProject] = useState(null);
@@ -16,7 +17,7 @@ function App() {
     { id: 6, title: "Golden Edge",  imageUrl: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&q=80" },
   ];
 
-  const handleProjectClick = (item) => {
+  const handleProjectClick = (item: any) => {
     setActiveProject(item);
     setPage("detail");
   };

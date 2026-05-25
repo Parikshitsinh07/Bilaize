@@ -1,8 +1,15 @@
 import { useState } from "react";
 
+interface HeaderProps {
+  onBack: () => void;
+  activeMenu?: string | null;
+  setActiveMenu?: (menu: string | null) => void;
+}
+
 /**
  * Reusable Header Component
  *
+ * 
  * Props:
  *   onBack       — function called when Home icon is clicked
  *   activeMenu   — (optional) controlled state from parent; if not passed, Header manages its own state
@@ -14,8 +21,8 @@ import { useState } from "react";
  *   <Header onBack={handleBack} activeMenu={menu} setActiveMenu={setMenu} />
  */
 
-export default function Header({ onBack, activeMenu: controlledMenu, setActiveMenu: controlledSetMenu }) {
-  const [internalMenu, setInternalMenu] = useState(null);
+export default function Header({ onBack, activeMenu: controlledMenu, setActiveMenu: controlledSetMenu }: HeaderProps) {
+  const [internalMenu, setInternalMenu] = useState<string | null>(null);
   const [aboutHovered, setAboutHovered] = useState(false);
 
   // Support both controlled (from parent) and uncontrolled (self-managed) mode

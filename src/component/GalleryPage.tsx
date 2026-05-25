@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Header from "./Header"; // ← Reusable header — use same path where you save Header.jsx
 
-export default function GalleryPage({ cards, onBack }) {
+export default function GalleryPage({ cards, onBack }: { cards:any, onBack:any} ) {
   const [selected, setSelected] = useState(null);
   const [visible, setVisible] = useState(false);
 

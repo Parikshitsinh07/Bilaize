@@ -378,7 +378,10 @@ function CardGalaxy() {
    Page/Component Export
    ========================= */
 
-export default function StellarCardGallerySingle({ onGalleryClick, onWorkClick }) {
+export default function StellarCardGallerySingle({ onGalleryClick, onWorkClick }:{
+  onGalleryClick: any
+  onWorkClick: any
+}) {
   return (
     <CardProvider>
       <div className="w-full h-screen relative overflow-hidden bg-white">
