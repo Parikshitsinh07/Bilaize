@@ -1,0 +1,222 @@
+/* =========================
+MAIN SLIDER
+========================= */
+.slider {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 7vw;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    #f7f7f5,
+    #ececec
+  );
+}
+
+/* =========================
+LEFT CONTENT
+========================= */
+.slider-left {
+  width: 40%;
+  z-index: 20;
+}
+
+.slider-title {
+  font-size: clamp(100px, 9vw, 180px);
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -8px;
+  color: #111;
+  overflow: hidden;
+}
+
+.slider-title span {
+  display: inline-block;
+}
+
+.slider-info {
+  margin-top: 40px;
+  max-width: 320px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.8;
+  font-size: 12px;
+}
+
+/* =========================
+RIGHT SIDE
+========================= */
+.slider-right {
+  width: 60%;
+  height: 100%;
+  position: relative;
+}
+
+/* =========================
+COMMON CARD
+========================= */
+.slide-card {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 22px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.15);
+  transition:
+    transform 1s cubic-bezier(.22,.61,.36,1),
+    opacity 1s ease,
+    filter 1s ease;
+  cursor: pointer;
+}
+
+.slide-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s ease;
+}
+
+.slide-card:hover img {
+  transform: scale(1.05);
+}
+
+/* =========================
+ACTIVE CARD
+========================= */
+.active-card {
+  width: 640px;
+  height: 420px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  opacity: 1;
+  filter: blur(0px);
+}
+
+.active-card:hover {
+  transform: translate(-50%, -50%) scale(1.02);
+}
+
+/* =========================
+TOP CARD
+========================= */
+.top-card {
+  width: 420px;
+  height: 260px;
+  top: 8%;
+  right: 5%;
+  transform: rotate(-10deg);
+  opacity: 0.22;
+  filter: blur(14px);
+  z-index: 1;
+}
+
+/* =========================
+BOTTOM CARD
+========================= */
+.bottom-card {
+  width: 420px;
+  height: 260px;
+  bottom: 8%;
+  right: 8%;
+  transform: rotate(10deg);
+  opacity: 0.22;
+  filter: blur(14px);
+  z-index: 1;
+}
+
+/* =========================
+NAVIGATION
+========================= */
+.slider-nav {
+  position: absolute;
+  bottom: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+}
+
+.slider-nav button {
+  background: rgba(255,255,255,.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0,0,0,.1);
+  color: #111;
+  padding: 14px 30px;
+  border-radius: 50px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.slider-nav button:hover {
+  background: #111;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+@media (max-width: 1400px) {
+  .active-card {
+    width: 560px;
+    height: 360px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .active-card {
+    width: 500px;
+    height: 320px;
+  }
+  .top-card,
+  .bottom-card {
+    width: 340px;
+    height: 220px;
+  }
+}
+
+@media (max-width: 992px) {
+  .slider {
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+  }
+  .slider-left {
+    width: 100%;
+    text-align: center;
+  }
+  .slider-right {
+    width: 100%;
+    height: 500px;
+  }
+  .slider-title {
+    font-size: 90px;
+  }
+  .active-card {
+    width: 440px;
+    height: 280px;
+  }
+  .top-card,
+  .bottom-card {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .active-card {
+    width: 90%;
+    height: 260px;
+  }
+  .slider-title {
+    font-size: 70px;
+  }
+  .slider-nav {
+    bottom: 25px;
+  }
+}

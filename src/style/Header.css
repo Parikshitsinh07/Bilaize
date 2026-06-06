@@ -1,0 +1,43 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background: #000;
+  border-bottom: 4px solid #fff;
+}
+
+.top-line {
+  height: 4px;
+  background: #b22222;
+}
+
+.nav-container {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
+}
+
+.nav-item {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #9c9c9c;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  color: white;
+}
+
+.nav-item.active {
+  background: white;
+  color: black;
+  border-radius: 2px;
+}

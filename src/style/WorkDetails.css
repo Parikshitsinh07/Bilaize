@@ -1,0 +1,316 @@
+/* ==========================================================================
+   WORK DETAILS PAGE (MINIMAL PREMIUM DESIGN - SCREENSHOT BASED)
+   ========================================================================== */
+
+.project-page {
+  min-height: 100vh;
+  background: #000000;
+  color: #ffffff;
+  font-family: "Roboto Mono", "Inter", sans-serif;
+  overflow-x: hidden;
+  padding-bottom: 0;
+}
+
+/* --- Fixed Off-White Top Navigation --- */
+.project-top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background: #f7f5f5;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.back-link-centered {
+  color: #111111;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 300;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-link-centered:hover {
+  transform: scale(1.1);
+}
+
+/* --- Hero Banner Section --- */
+.project-hero {
+  position: relative;
+  width: 100%;
+  height: 62vh;
+  margin-top: 52px; /* Nav bar height offset */
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.project-hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.project-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.4) 60%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  z-index: 1;
+}
+
+.project-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding-bottom: 5vh;
+}
+
+.project-title-heading {
+  font-family: "Spectral", serif;
+  font-size: clamp(64px, 8vw, 115px);
+  font-weight: 300;
+  color: #dfd5c6; /* Warm sand/tan color from screenshot */
+  letter-spacing: -2px;
+  line-height: 1.0;
+}
+
+/* --- Content Narrative Grid (Pure Black Background) --- */
+.project-info-grid {
+  background: #000000;
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+  padding: 60px 4vw 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .project-info-grid {
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px 6vw;
+  }
+}
+
+.project-about-col {
+  width: 55%;
+}
+
+.project-credits-col {
+  width: 25%;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .project-about-col,
+  .project-credits-col {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+.section-label {
+  display: block;
+  font-family: "Roboto Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #555555;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.about-text-uppercase {
+  font-family: "Roboto Mono", monospace;
+  font-size: 13px;
+  line-height: 1.9;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-align: justify;
+}
+
+.credits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.credit-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+@media (max-width: 768px) {
+  .credit-row {
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+  }
+}
+
+.credit-title {
+  font-family: "Roboto Mono", monospace;
+  font-size: 10px;
+  color: #555555;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.credit-name {
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* --- Asymmetric Gallery Section --- */
+.project-gallery-container {
+  background: #000000;
+  padding: 0 4vw;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.gallery-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.gallery-row {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .gallery-row {
+    flex-direction: column;
+  }
+}
+
+.gallery-img-wrapper {
+  flex: 1;
+  overflow: hidden;
+  background: #111111;
+}
+
+.gallery-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-row.single .gallery-img-wrapper {
+  aspect-ratio: 16 / 9;
+}
+
+.gallery-row.double .gallery-img-wrapper {
+  aspect-ratio: 4 / 5;
+}
+
+@media (max-width: 768px) {
+  .gallery-row.double .gallery-img-wrapper {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* --- Other Works Navigation --- */
+.other-works-section {
+  background: #000000;
+  padding: 80px 0 60px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.other-works-title {
+  font-family: "Roboto Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #555555;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+.other-works-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.other-work-link {
+  font-family: "Roboto Mono", monospace;
+  font-size: 13px;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  transition: opacity 0.3s ease, letter-spacing 0.3s ease;
+  font-weight: 500;
+}
+
+.other-work-link:hover {
+  opacity: 0.6;
+  letter-spacing: 4px;
+}
+
+.other-work-link.active-slug {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* --- Case Study Footer --- */
+.project-footer {
+  background: #000000;
+  padding: 60px 4vw 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-copy,
+.footer-contact-link {
+  font-family: "Roboto Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #555555;
+  text-transform: uppercase;
+}
+
+.footer-contact-link {
+  color: #888888;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-contact-link:hover {
+  color: #ffffff;
+}

@@ -1,0 +1,83 @@
+.splash {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+.logo-box {
+  position: relative;
+  width: 900px;
+}
+
+.logo-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.logo-text-bg {
+  fill: #222;
+  font-size: 180px;
+  font-weight: 900;
+  letter-spacing: 10px;
+}
+
+.logo-text-mask {
+  fill: white;
+  font-size: 180px;
+  font-weight: 900;
+  letter-spacing: 10px;
+}
+
+.wave {
+  fill: #ff2d2d;
+}
+
+.wave2 {
+  fill: rgba(255, 80, 80, 0.35);
+}
+
+.wave-svg {
+  filter: drop-shadow(
+    0 0 30px rgba(255, 50, 50, 0.5)
+  );
+}
+
+.noise {
+  position: absolute;
+  inset: -100%;
+  opacity: .05;
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 4px 4px;
+  animation: noiseMove 10s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes noiseMove {
+  from {
+    transform: translate(0,0);
+  }
+  to {
+    transform: translate(-150px,-150px);
+  }
+}
+
+.reflection {
+  position: absolute;
+  left: 50%;
+  top: 65%;
+  width: 700px;
+  height: 120px;
+  transform: translateX(-50%) rotateX(70deg);
+  background: radial-gradient(
+    circle,
+    rgba(255,50,50,.25),
+    transparent 70%
+  );
+  filter: blur(30px);
+}
