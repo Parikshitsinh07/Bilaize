@@ -10,6 +10,8 @@ const WorkSlider = () => {
   const [current, setCurrent] = useState(0);
   const sliderRef = useRef(null);
   const lockRef = useRef(false);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
   const prev = current === 0 ? works.length - 1 : current - 1;
   const next = current === works.length - 1 ? 0 : current + 1;
@@ -44,6 +46,28 @@ const WorkSlider = () => {
 
   const nextSlide = () => changeSlide("next");
   const prevSlide = () => changeSlide("prev");
+
+  // Touch Swipe Handlers for Mobile UX
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+    touchEndX.current = e.targetTouches[0].clientX; // initialize
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const swipeDistance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50; // threshold in pixels
+    if (Math.abs(swipeDistance) > minSwipeDistance) {
+      if (swipeDistance > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }
+  };
 
   useEffect(() => {
     const cards = sliderRef.current.querySelectorAll(".slide-card");
@@ -92,7 +116,12 @@ const WorkSlider = () => {
   }, [current]);
 
   return (
-    <section className="slider">
+    <section 
+      className="slider"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className="slider-left">
         <TitleAnimation text={works[current].title} />
         <div className="slider-info">

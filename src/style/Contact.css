@@ -20,7 +20,7 @@
 }
 
 .contact-title {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-garamond);
   font-size: clamp(64px, 7vw, 110px);
   font-weight: 300;
   line-height: 1.0;
@@ -124,3 +124,52 @@
 .submit-btn:active {
   transform: scale(0.98);
 }
+
+@media (max-width: 767px) {
+  .contact-page {
+    padding-top: 100px;
+    padding-bottom: 48px;
+    justify-content: flex-start;
+  }
+  .contact-container {
+    width: 92%;
+    padding-top: 24px;
+  }
+  .contact-title {
+    font-size: clamp(40px, 10vw, 56px);
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+  }
+  .contact-subtitle {
+    font-size: 10px;
+    margin-bottom: 32px;
+    letter-spacing: 1.5px;
+  }
+  .contact-form {
+    gap: 16px;
+  }
+  .form-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+  /* iOS fix: font-size >= 16px prevents auto-zoom on focus */
+  .form-input,
+  .form-textarea {
+    padding: 16px;
+    font-size: 16px;
+    border-radius: 6px;
+  }
+  .form-textarea {
+    min-height: 130px;
+  }
+  /* Apple HIG: minimum 44px touch target */
+  .submit-btn {
+    padding: 16px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    min-height: 52px;
+    border-radius: 6px;
+    margin-top: 8px;
+  }
+}
+

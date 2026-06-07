@@ -208,15 +208,51 @@ RESPONSIVE
   }
 }
 
-@media (max-width: 768px) {
-  .active-card {
-    width: 90%;
-    height: 260px;
+@media (max-width: 767px) {
+  .slider {
+    padding: 100px 5vw 70px 5vw;
+    height: 100vh;
+    justify-content: center;
+    gap: 24px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .slider-left {
+    width: 100%;
+    text-align: center;
+    margin-top: 0;
   }
   .slider-title {
-    font-size: 70px;
+    font-size: clamp(44px, 10vw, 60px);
+    letter-spacing: -2px;
+  }
+  .slider-info {
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    line-height: 1.7;
+    max-width: 260px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .slider-right {
+    width: 100%;
+    height: 260px;
+  }
+  .active-card {
+    width: 92%;
+    height: 240px;
+    border-radius: 16px;
   }
   .slider-nav {
-    bottom: 25px;
+    bottom: 24px;
+    gap: 12px;
+  }
+  .slider-nav button {
+    padding: 12px 24px;
+    font-size: 12px;
+    border-radius: 50px;
+    min-height: 44px;
   }
 }
+

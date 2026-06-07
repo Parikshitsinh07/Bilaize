@@ -12,6 +12,7 @@
 .logo-box {
   position: relative;
   width: 900px;
+  max-width: 90%;
 }
 
 .logo-svg {

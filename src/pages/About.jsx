@@ -5,17 +5,18 @@ import "../style/About.css";
 
 const About = () => {
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -15 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    >
       <Header />
       <div className="about-page">
         <div className="max-w-6xl mx-auto px-6">
           
           {/* Intro Section */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <div>
             <div className="about-intro-badge">
               Creative Studio. Digital Artisans. Brand Builders.
             </div>
@@ -25,18 +26,12 @@ const About = () => {
             <p className="about-description">
               Brielite Studios is a multidisciplinary creative collective driven by the pursuit of beauty in restraint. We believe design isn’t about adding more — it’s about revealing what matters. Our work blends minimalism, rhythm, and emotion to create digital interfaces, brand identities, and visual experiences that feel inevitable.
             </p>
-          </motion.div>
+          </div>
 
           <div className="divider"></div>
 
           {/* Metrics Grid */}
-          <motion.section 
-            className="mb-24"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-          >
+          <section className="mb-24">
             <div className="metrics-grid">
               <div className="metric-item">
                 <span className="metric-label">FROM CONCEPT</span>
@@ -55,18 +50,12 @@ const About = () => {
                 <span className="metric-value">Brand, Web & Motion</span>
               </div>
             </div>
-          </motion.section>
+          </section>
 
           <div className="divider"></div>
 
           {/* Experience Section */}
-          <motion.section 
-            className="mb-24"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+          <section className="mb-24">
             <h3 className="about-section-heading">Our Timeline</h3>
             <div className="experience-list">
               <div className="experience-item">
@@ -91,27 +80,21 @@ const About = () => {
                 </div>
               </div>
             </div>
-          </motion.section>
+          </section>
 
           <div className="divider"></div>
 
           {/* Mantra Section */}
-          <motion.section 
-            className="mantra-section"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+          <section className="mantra-section">
             <p className="mantra-text">
               “Design isn’t about adding more. It’s about uncovering what’s already there.”
             </p>
-          </motion.section>
+          </section>
 
         </div>
       </div>
       <Footer />
-    </>
+    </motion.div>
   );
 };
 

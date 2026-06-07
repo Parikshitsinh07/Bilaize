@@ -32,3 +32,24 @@
 .gallery-card:hover img {
   transform: scale(1.05);
 }
+
+@media (max-width: 767px) {
+  .gallery-page {
+    padding: 100px 16px 48px 16px;
+  }
+  /* Force single column masonry on mobile for better image viewing */
+  .masonry-grid {
+    flex-direction: column;
+    margin-left: 0;
+  }
+  .masonry-column {
+    padding-left: 0;
+    width: 100% !important;
+  }
+  .gallery-card {
+    margin-bottom: 16px;
+    border-radius: 6px;
+  }
+}
+
+

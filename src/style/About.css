@@ -17,7 +17,7 @@
 }
 
 .about-title {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-garamond);
   font-size: clamp(60px, 8vw, 120px);
   font-weight: 300;
   line-height: 1.0;
@@ -40,7 +40,7 @@
 }
 
 .about-section-heading {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-garamond);
   font-size: 40px;
   font-weight: 400;
   margin-bottom: 40px;
@@ -74,7 +74,7 @@
 }
 
 .metric-value {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-garamond);
   font-size: 32px;
   font-weight: 400;
   color: #111;
@@ -108,7 +108,7 @@
 }
 
 .experience-detail h4 {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-garamond);
   font-size: 24px;
   font-weight: 500;
   color: #111;
@@ -126,7 +126,7 @@
 }
 
 .mantra-text {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-garamond);
   font-size: clamp(32px, 4.5vw, 56px);
   font-weight: 300;
   line-height: 1.3;
@@ -134,3 +134,61 @@
   max-width: 900px;
   margin: 0 auto;
 }
+
+@media (max-width: 767px) {
+  .about-page {
+    padding-top: 100px;
+    padding-bottom: 48px;
+  }
+  .about-intro-badge {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    margin-bottom: 16px;
+  }
+  .about-title {
+    font-size: clamp(40px, 10vw, 56px);
+    line-height: 1.0;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+  }
+  .about-description {
+    font-size: 17px;
+    line-height: 1.65;
+    margin-bottom: 40px;
+  }
+  .divider {
+    margin: 40px 0;
+  }
+  .about-section-heading {
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
+  .metrics-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .metric-item {
+    padding: 20px 0;
+  }
+  .metric-value {
+    font-size: 28px;
+  }
+  .experience-item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .experience-list {
+    gap: 24px;
+  }
+  .experience-detail h4 {
+    font-size: 22px;
+  }
+  .mantra-section {
+    padding: 56px 0;
+  }
+  .mantra-text {
+    font-size: clamp(22px, 6.5vw, 36px);
+    line-height: 1.35;
+  }
+}
+

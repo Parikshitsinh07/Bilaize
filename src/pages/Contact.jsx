@@ -5,15 +5,15 @@ import "../style/Contact.css";
 
 const Contact = () => {
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -15 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    >
       <Header />
       <div className="contact-page">
-        <motion.div 
-          className="contact-container"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
+        <div className="contact-container">
           <h1 className="contact-title">Get In Touch</h1>
           <p className="contact-subtitle">
             Let’s talk about what you’re building. I’d love to help.
@@ -53,10 +53,10 @@ const Contact = () => {
               Submit
             </button>
           </form>
-        </motion.div>
+        </div>
       </div>
       <Footer />
-    </>
+    </motion.div>
   );
 };
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import "../style/Hero.css";
 
 const Hero = () => {
@@ -16,6 +17,31 @@ const Hero = () => {
     }
   };
 
+  const titleText = "BILAIZE STUDIOS";
+
+  // Animation variants for staggered character reveal
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.04,
+        delayChildren: 3.4, // Wait for splash screen wave expansion
+      },
+    },
+  };
+
+  const charVariants = {
+    hidden: { y: "100%" },
+    visible: {
+      y: "0%",
+      transition: {
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1], // Smooth cubic-bezier ease
+      },
+    },
+  };
+
   return (
     <section className="hero" onClick={createRipple}>
       <video
@@ -23,14 +49,16 @@ const Hero = () => {
         muted
         loop
         playsInline
+        preload="auto"
         className="hero-video"
       >
         <source
-          src="https://cloudinary-marketing-res.cloudinary.com/video/upload/e_preview:duration_15:max_seg_9:min_seg_dur_1/q_auto/f_auto/surfing_travel.mp4"
+          src={`${import.meta.env.BASE_URL}hero.mp4`}
           type="video/mp4"
         />
       </video>
       <div className="hero-overlay"></div>
+      
       {ripples.map((ripple) => (
         <span
           key={ripple.id}
@@ -41,10 +69,28 @@ const Hero = () => {
           }}
         />
       ))}
+
       <div className="hero-content">
-        <h1 className="hero-title">
-          BRIELITE STUDIOS
-        </h1>
+        <motion.h1 
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="hero-title-reveal"
+        >
+          {titleText.split(" ").map((word, wordIdx) => (
+            <span key={wordIdx} className="word-wrapper">
+              {word.split("").map((char, charIdx) => (
+                <span key={charIdx} className="char-wrapper">
+                  <motion.span variants={charVariants} className="char-inner">
+                    {char}
+                  </motion.span>
+                </span>
+              ))}
+              {/* Add space between words */}
+              <span className="char-wrapper">&nbsp;</span>
+            </span>
+          ))}
+        </motion.h1>
       </div>
     </section>
   );

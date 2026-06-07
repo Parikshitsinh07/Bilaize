@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { worksDetails } from "../data/works";
+import MobileNav from "./MobileNav";
 import "../style/WorkDetails.css";
 
 const WorkDetails = () => {
@@ -41,11 +42,13 @@ const WorkDetails = () => {
   return (
     <section className="project-page">
       {/* Centered Back Arrow Nav Bar */}
-      <header className="project-top-nav">
+      <header className="project-top-nav hidden md:flex">
         <Link to="/work" className="back-link-centered">
           ←
         </Link>
       </header>
+      <MobileNav showBack={true} />
+
 
       {/* Hero Section */}
       <div className="project-hero">

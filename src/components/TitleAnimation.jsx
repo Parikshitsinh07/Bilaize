@@ -8,11 +8,12 @@ const TitleAnimation = ({ text }) => {
   useEffect(() => {
     if (!titleRef.current) return;
     const chars = titleRef.current.querySelectorAll("span");
+    const isMobile = window.innerWidth < 768;
 
     gsap.fromTo(
       chars,
       {
-        y: 180,
+        y: isMobile ? 60 : 180,
         opacity: 0,
       },
       {
