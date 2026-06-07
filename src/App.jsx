@@ -34,7 +34,15 @@ function App() {
     };
   }, []);
 
-  // 2. Splash screen is dismissed when the Vimeo hero video loads (see Hero.jsx)
+  // 2. Splash Screen Timing (Cross-fades exactly as scale finishes)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSplashMounted(false);
+    }, 4300); // Allow scale-up (2.9s + 1.3s = 4.2s) to fully finish
+
+    return () => clearTimeout(timer);
+  }, []);
+
 
   return (
     <>
@@ -50,7 +58,7 @@ function App() {
       >
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<Home onVideoLoad={() => setSplashMounted(false)} />} />
+            <Route path="/" element={<Home />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />

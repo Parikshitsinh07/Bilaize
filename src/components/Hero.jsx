@@ -2,14 +2,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "../style/Hero.css";
 
-const Hero = ({ onVideoLoad }) => {
+const Hero = () => {
   const [ripples, setRipples] = useState([]);
   const [videoLoaded, setVideoLoaded] = useState(false);
-
-  const handleVideoLoad = () => {
-    setVideoLoaded(true);
-    if (onVideoLoad) onVideoLoad(); // dismiss splash screen
-  };
 
   const createRipple = (e) => {
     for (let i = 0; i < 4; i++) {
@@ -72,7 +67,7 @@ const Hero = ({ onVideoLoad }) => {
           allowFullScreen
           className="hero-vimeo"
           title="Hero Background"
-          onLoad={handleVideoLoad}
+          onLoad={() => setVideoLoaded(true)}
         />
       </div>
 
