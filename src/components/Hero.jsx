@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import "../style/Hero.css";
 
 const Hero = () => {
   const [ripples, setRipples] = useState([]);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   const createRipple = (e) => {
     for (let i = 0; i < 4; i++) {
@@ -19,14 +20,13 @@ const Hero = () => {
 
   const titleText = "BILAIZE STUDIOS";
 
-  // Animation variants for staggered character reveal
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.04,
-        delayChildren: 3.4, // Wait for splash screen wave expansion
+        delayChildren: 3.4,
       },
     },
   };
@@ -37,14 +37,29 @@ const Hero = () => {
       y: "0%",
       transition: {
         duration: 0.8,
-        ease: [0.16, 1, 0.3, 1], // Smooth cubic-bezier ease
+        ease: [0.16, 1, 0.3, 1],
       },
     },
   };
 
   return (
     <section className="hero" onClick={createRipple}>
-      {/* Vimeo background video — background=1 enables autoplay/loop/mute/no-controls */}
+
+      {/* Video loading overlay — fades out when iframe loads */}
+      <AnimatePresence>
+        {!videoLoaded && (
+          <motion.div
+            className="hero-loader"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <div className="hero-loader-ring" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Vimeo background embed */}
       <div className="hero-vimeo-wrapper">
         <iframe
           src="https://player.vimeo.com/video/1199142896?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0"
@@ -52,10 +67,12 @@ const Hero = () => {
           allowFullScreen
           className="hero-vimeo"
           title="Hero Background"
+          onLoad={() => setVideoLoaded(true)}
         />
       </div>
+
       <div className="hero-overlay"></div>
-      
+
       {ripples.map((ripple) => (
         <span
           key={ripple.id}
@@ -68,7 +85,7 @@ const Hero = () => {
       ))}
 
       <div className="hero-content">
-        <motion.h1 
+        <motion.h1
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -83,7 +100,7 @@ const Hero = () => {
                   </motion.span>
                 </span>
               ))}
-              {/* Add space between words */}
+              {/* space between words */}
               <span className="char-wrapper">&nbsp;</span>
             </span>
           ))}
