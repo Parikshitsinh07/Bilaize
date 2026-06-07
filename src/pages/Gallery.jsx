@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Masonry from "react-masonry-css";
 import "../style/Gallery.css";
 import Footer from "../components/Footer";
@@ -22,7 +23,22 @@ const breakpointColumnsObj = {
   500: 1,
 };
 
+/* Skeleton card — shimmer placeholder while images load */
+const SkeletonCard = ({ height }) => (
+  <div className="gallery-skeleton" style={{ height }} />
+);
+
+const skeletonHeights = [260, 340, 200, 300, 250, 380, 220, 310];
+
 const Gallery = () => {
+  const [loadedImages, setLoadedImages] = useState({});
+
+  const handleImageLoad = (index) => {
+    setLoadedImages((prev) => ({ ...prev, [index]: true }));
+  };
+
+  const allLoaded = Object.keys(loadedImages).length === images.length;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
@@ -32,17 +48,51 @@ const Gallery = () => {
     >
       <Header />
       <div className="gallery-page">
+
+        {/* Skeleton grid — shows while images are loading */}
+        <AnimatePresence>
+          {!allLoaded && (
+            <motion.div
+              key="skeleton"
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              style={{ position: "absolute", inset: 0, paddingTop: "100px", padding: "100px 16px 40px" }}
+            >
+              <Masonry
+                breakpointCols={breakpointColumnsObj}
+                className="masonry-grid"
+                columnClassName="masonry-column"
+              >
+                {skeletonHeights.map((h, i) => (
+                  <SkeletonCard key={i} height={h} />
+                ))}
+              </Masonry>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Real images — hidden until loaded */}
         <Masonry
           breakpointCols={breakpointColumnsObj}
           className="masonry-grid"
           columnClassName="masonry-column"
         >
           {images.map((img, index) => (
-            <div key={index} className="gallery-card">
-              <img src={img} alt="" />
+            <div
+              key={index}
+              className="gallery-card"
+              style={{ opacity: loadedImages[index] ? 1 : 0, transition: "opacity 0.4s ease" }}
+            >
+              <img
+                src={img}
+                alt=""
+                onLoad={() => handleImageLoad(index)}
+              />
             </div>
           ))}
         </Masonry>
+
       </div>
       <Footer />
     </motion.div>

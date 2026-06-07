@@ -33,6 +33,25 @@
   transform: scale(1.05);
 }
 
+/* ── Skeleton shimmer loading card ── */
+.gallery-skeleton {
+  margin-bottom: 20px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    #e8e8e8 25%,
+    #f0f0f0 50%,
+    #e8e8e8 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 @media (max-width: 767px) {
   .gallery-page {
     padding: 100px 16px 48px 16px;

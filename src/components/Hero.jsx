@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import SplashScreen from "./SplashScreen";
 import "../style/Hero.css";
-
-// Module-level flag — persists across route changes so loader
-// never shows again after the first visit to Home
-let hasVideoLoaded = false;
 
 const Hero = () => {
   const [ripples, setRipples] = useState([]);
-  // Init from module flag so re-mounts don't show loader again
-  const [videoLoaded, setVideoLoaded] = useState(hasVideoLoaded);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  // Minimum display time = 4300ms so SplashScreen always
+  // completes its animation (even on cached fast loads)
+  useEffect(() => {
+    const timer = setTimeout(() => setVideoLoaded(true), 4300);
+    return () => clearTimeout(timer);
+  }, []);
 
   const createRipple = (e) => {
     for (let i = 0; i < 4; i++) {
@@ -50,17 +53,12 @@ const Hero = () => {
   return (
     <section className="hero" onClick={createRipple}>
 
-      {/* Video loading overlay — fades out when iframe loads */}
+      {/* Show SplashScreen while Vimeo video is loading */}
       <AnimatePresence>
         {!videoLoaded && (
-          <motion.div
-            className="hero-loader"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <div className="hero-loader-ring" />
-          </motion.div>
+          <div style={{ position: "absolute", inset: 0, zIndex: 30 }}>
+            <SplashScreen />
+          </div>
         )}
       </AnimatePresence>
 
@@ -72,7 +70,7 @@ const Hero = () => {
           allowFullScreen
           className="hero-vimeo"
           title="Hero Background"
-          onLoad={() => { hasVideoLoaded = true; setVideoLoaded(true); }}
+          onLoad={() => setVideoLoaded(true)}
         />
       </div>
 
