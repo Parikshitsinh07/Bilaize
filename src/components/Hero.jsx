@@ -2,9 +2,14 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "../style/Hero.css";
 
+// Module-level flag — persists across route changes so loader
+// never shows again after the first visit to Home
+let hasVideoLoaded = false;
+
 const Hero = () => {
   const [ripples, setRipples] = useState([]);
-  const [videoLoaded, setVideoLoaded] = useState(false);
+  // Init from module flag so re-mounts don't show loader again
+  const [videoLoaded, setVideoLoaded] = useState(hasVideoLoaded);
 
   const createRipple = (e) => {
     for (let i = 0; i < 4; i++) {
@@ -67,7 +72,7 @@ const Hero = () => {
           allowFullScreen
           className="hero-vimeo"
           title="Hero Background"
-          onLoad={() => setVideoLoaded(true)}
+          onLoad={() => { hasVideoLoaded = true; setVideoLoaded(true); }}
         />
       </div>
 
