@@ -44,19 +44,16 @@ const Hero = () => {
 
   return (
     <section className="hero" onClick={createRipple}>
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        className="hero-video"
-      >
-        <source
-          src={`${import.meta.env.BASE_URL}hero.mp4`}
-          type="video/mp4"
+      {/* Vimeo background video — background=1 enables autoplay/loop/mute/no-controls */}
+      <div className="hero-vimeo-wrapper">
+        <iframe
+          src="https://player.vimeo.com/video/1199142896?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0"
+          allow="autoplay; fullscreen"
+          allowFullScreen
+          className="hero-vimeo"
+          title="Hero Background"
         />
-      </video>
+      </div>
       <div className="hero-overlay"></div>
       
       {ripples.map((ripple) => (
