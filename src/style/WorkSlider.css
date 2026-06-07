@@ -245,7 +245,7 @@ RESPONSIVE
     border-radius: 16px;
   }
   .slider-nav {
-    bottom: 24px;
+    bottom: 100px;
     gap: 12px;
   }
   .slider-nav button {
