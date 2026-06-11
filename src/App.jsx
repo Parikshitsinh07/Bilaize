@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import SplashScreen from "./components/SplashScreen";
+import MusicPlayer from "./components/MusicPlayer";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Lenis from "lenis";
@@ -46,6 +47,9 @@ function App() {
 
   return (
     <>
+      {/* Floating music player — visible on all pages */}
+      <MusicPlayer />
+
       {/* Splash screen overlays content, then unmounts */}
       {splashMounted && <SplashScreen />}
 

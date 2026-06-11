@@ -92,8 +92,8 @@
 
 .hero-title-reveal {
   font-family: "Inter", sans-serif;
-  font-size: clamp(48px, 9vw, 115px); /* Fully responsive size */
-  font-weight: 300;
+  font-size: clamp(48px, 9vw, 140px); /* Fully responsive size */
+  font-weight: 700;
   color: #ffffff;
   display: flex;
   flex-wrap: wrap;

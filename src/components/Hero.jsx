@@ -26,7 +26,7 @@ const Hero = () => {
     }
   };
 
-  const titleText = "BILAIZE STUDIOS";
+  const titleText = "BRIELITE STUDIOS";
 
   const containerVariants = {
     hidden: { opacity: 0 },
