@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import SplashScreen from "./components/SplashScreen";
 import MusicPlayer from "./components/MusicPlayer";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -10,12 +10,13 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Work from "./pages/Work";
 import WorkDetailsPage from "./pages/WorkDetailsPage";
+import CategoryProjectsPage from "./pages/CategoryProjectsPage";
 
-function App() {
-  const [splashMounted, setSplashMounted] = useState(true);
+function App({ onReady }) {
+  const [splashDone, setSplashDone] = useState(false);
   const location = useLocation();
 
-  // 1. Lenis Smooth Scroll Initialization (Full Stack UX Standard)
+  // ── Lenis smooth scroll ──────────────────────────────────────────────
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -27,33 +28,36 @@ function App() {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
-
     requestAnimationFrame(raf);
 
-    return () => {
-      lenis.destroy();
-    };
+    return () => lenis.destroy();
   }, []);
 
-  // 2. Splash Screen Timing (Cross-fades exactly as scale finishes)
+  // ── Dismiss pre-React HTML splash as soon as React has painted ──────
+  // We do this on first render — React is alive, so the HTML splash
+  // can start fading out. The React SplashScreen takes over visually.
+  useEffect(() => {
+    if (onReady) onReady();
+  }, [onReady]);
+
+  // ── React SplashScreen timing ────────────────────────────────────────
+  // Matches the animation: 2.9s delay + 1.3s scale = 4.2s total
   useEffect(() => {
     const timer = setTimeout(() => {
-      setSplashMounted(false);
-    }, 4300); // Allow scale-up (2.9s + 1.3s = 4.2s) to fully finish
-
+      setSplashDone(true);
+    }, 4300);
     return () => clearTimeout(timer);
   }, []);
 
-
   return (
     <>
-      {/* Floating music player — visible on all pages */}
+      {/* Floating music player — always visible */}
       <MusicPlayer />
 
-      {/* Splash screen overlays content, then unmounts */}
-      {splashMounted && <SplashScreen />}
+      {/* React SplashScreen — overlays content, then unmounts */}
+      {!splashDone && <SplashScreen />}
 
-      {/* Main content starts fading in during splash scale expansion */}
+      {/* Main app — fades in while splash is still scaling */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -62,12 +66,13 @@ function App() {
       >
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<Home />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/work" element={<Work />} />
-            <Route path="/work/:slug" element={<WorkDetailsPage />} />
+            <Route path="/"                          element={<Home />} />
+            <Route path="/gallery"                   element={<Gallery />} />
+            <Route path="/about"                     element={<About />} />
+            <Route path="/contact"                   element={<Contact />} />
+            <Route path="/work"                      element={<Work />} />
+            <Route path="/work/:categorySlug"        element={<CategoryProjectsPage />} />
+            <Route path="/work/:categorySlug/:slug"  element={<WorkDetailsPage />} />
           </Routes>
         </AnimatePresence>
       </motion.div>

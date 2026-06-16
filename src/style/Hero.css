@@ -92,7 +92,7 @@
 
 .hero-title-reveal {
   font-family: "Inter", sans-serif;
-  font-size: clamp(48px, 9vw, 140px); /* Fully responsive size */
+  font-size: clamp(48px, 9vw, 217px); /* Fully responsive size */
   font-weight: 700;
   color: #ffffff;
   display: flex;
@@ -102,15 +102,15 @@
   line-height: 1.0;
   letter-spacing: -2px;
   width: 90%;
-  max-width: 1300px;
+  max-width: 100vw;
   mask-image: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 1) 40%,
+    rgba(0, 0, 0, 1) 0%,
     rgba(0, 0, 0, 0) 100%
   );
   -webkit-mask-image: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 1) 40%,
+    rgba(0, 0, 0, 1) 0%,
     rgba(0, 0, 0, 0) 100%
   );
 }

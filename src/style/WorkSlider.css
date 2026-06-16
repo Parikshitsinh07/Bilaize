@@ -1,5 +1,5 @@
 /* =========================
-MAIN SLIDER
+   MAIN SLIDER LAYOUT
 ========================= */
 .slider {
   width: 100%;
@@ -10,249 +10,211 @@ MAIN SLIDER
   padding: 0 7vw;
   overflow: hidden;
   position: relative;
-  background: linear-gradient(
-    135deg,
-    #f7f7f5,
-    #ececec
-  );
+  background: linear-gradient(135deg, #f7f7f5, #ececec);
 }
 
 /* =========================
-LEFT CONTENT
+   LEFT CONTENT
 ========================= */
 .slider-left {
   width: 40%;
   z-index: 20;
+  flex-shrink: 0;
 }
 
+/* Title — GSAP manages the inner spans; this is the overflow wrapper */
 .slider-title {
-  font-size: clamp(100px, 9vw, 180px);
+  font-size: clamp(80px, 9vw, 160px);
   font-weight: 800;
-  line-height: 0.88;
-  letter-spacing: -8px;
+  line-height: 0.9;
+  letter-spacing: -6px;
   color: #111;
   overflow: hidden;
+  position: relative;
+  /* height is temporarily set by JS during animation — allow that */
+  min-height: 1em;
 }
 
 .slider-title span {
   display: inline-block;
+  will-change: transform;
 }
 
 .slider-info {
-  margin-top: 40px;
-  max-width: 320px;
+  margin-top: 32px;
+  max-width: 300px;
   color: #666;
   text-transform: uppercase;
   letter-spacing: 2px;
   line-height: 1.8;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 /* =========================
-RIGHT SIDE
+   RIGHT — image container
+   GSAP positions each card absolutely
+   anchored at top:50% left:50% (via xPercent/yPercent: -50)
 ========================= */
 .slider-right {
-  width: 60%;
+  width: 58%;
   height: 100%;
   position: relative;
+  flex-shrink: 0;
 }
 
 /* =========================
-COMMON CARD
+   SLIDE CARD BASE
+   GSAP sets: xPercent -50, yPercent -50, then x/y offsets
+   so top:50% left:50% is the anchor point for every card
 ========================= */
 .slide-card {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  /* Base card dimensions — GSAP scale changes apparent size for ghosts */
+  width: min(560px, 52vw);
+  aspect-ratio: 4 / 3;
   overflow: hidden;
-  border-radius: 22px;
-  box-shadow: 0 30px 80px rgba(0,0,0,.15);
-  transition:
-    transform 1s cubic-bezier(.22,.61,.36,1),
-    opacity 1s ease,
-    filter 1s ease;
-  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.14), 0 4px 16px rgba(0, 0, 0, 0.06);
+  will-change: transform, filter, opacity;
+  contain: layout style;
+  /* cursor set per-card by JS */
 }
 
 .slide-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1.2s ease;
+  display: block;
+  filter: brightness(0.92);
+  transition: transform 0.8s ease;
+  pointer-events: none;
+  user-select: none;
 }
 
-.slide-card:hover img {
-  transform: scale(1.05);
-}
-
-/* =========================
-ACTIVE CARD
-========================= */
-.active-card {
-  width: 640px;
-  height: 420px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  opacity: 1;
-  filter: blur(0px);
-}
-
-.active-card:hover {
-  transform: translate(-50%, -50%) scale(1.02);
+/* Subtle zoom on the active card hover */
+.slide-card[style*="cursor: pointer"]:hover img {
+  transform: scale(1.04);
 }
 
 /* =========================
-TOP CARD
-========================= */
-.top-card {
-  width: 420px;
-  height: 260px;
-  top: 8%;
-  right: 5%;
-  transform: rotate(-10deg);
-  opacity: 0.22;
-  filter: blur(14px);
-  z-index: 1;
-}
-
-/* =========================
-BOTTOM CARD
-========================= */
-.bottom-card {
-  width: 420px;
-  height: 260px;
-  bottom: 8%;
-  right: 8%;
-  transform: rotate(10deg);
-  opacity: 0.22;
-  filter: blur(14px);
-  z-index: 1;
-}
-
-/* =========================
-NAVIGATION
+   NAVIGATION
 ========================= */
 .slider-nav {
   position: absolute;
-  bottom: 45px;
+  bottom: 44px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 20px;
+  gap: 16px;
+  z-index: 30;
 }
 
 .slider-nav button {
-  background: rgba(255,255,255,.7);
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(0,0,0,.1);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   color: #111;
-  padding: 14px 30px;
+  padding: 13px 28px;
   border-radius: 50px;
-  font-size: 14px;
+  font-size: 13px;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.5px;
   cursor: pointer;
-  transition: .3s;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  min-height: 44px;
 }
 
 .slider-nav button:hover {
   background: #111;
-  color: white;
+  color: #fff;
   transform: translateY(-2px);
 }
 
 /* =========================
-RESPONSIVE
+   RESPONSIVE
 ========================= */
 @media (max-width: 1400px) {
-  .active-card {
-    width: 560px;
-    height: 360px;
-  }
+  .slide-card { width: min(500px, 50vw); }
+  .slider-title { font-size: clamp(72px, 8vw, 130px); }
 }
 
 @media (max-width: 1200px) {
-  .active-card {
-    width: 500px;
-    height: 320px;
-  }
-  .top-card,
-  .bottom-card {
-    width: 340px;
-    height: 220px;
-  }
+  .slide-card { width: min(440px, 46vw); }
 }
 
 @media (max-width: 992px) {
   .slider {
     flex-direction: column;
     justify-content: center;
-    gap: 40px;
+    padding: 110px 6vw 60px;
+    gap: 0;
   }
   .slider-left {
     width: 100%;
     text-align: center;
+    margin-bottom: 0;
+    flex-shrink: 0;
   }
+  .slider-info { margin-left: auto; margin-right: auto; }
   .slider-right {
     width: 100%;
-    height: 500px;
+    height: 320px;
+    flex-shrink: 0;
+  }
+  .slide-card {
+    width: min(400px, 80vw);
   }
   .slider-title {
-    font-size: 90px;
+    font-size: clamp(56px, 10vw, 90px);
+    letter-spacing: -4px;
   }
-  .active-card {
-    width: 440px;
-    height: 280px;
-  }
-  .top-card,
-  .bottom-card {
-    display: none;
-  }
+  .slider-nav { bottom: 20px; }
 }
 
 @media (max-width: 767px) {
   .slider {
-    padding: 100px 5vw 70px 5vw;
-    height: 100vh;
-    justify-content: center;
-    gap: 24px;
-    flex-direction: column;
-    align-items: center;
-  }
-  .slider-left {
-    width: 100%;
-    text-align: center;
-    margin-top: 0;
+    padding: 100px 5vw 70px;
+    gap: 0;
   }
   .slider-title {
-    font-size: clamp(44px, 10vw, 60px);
+    font-size: clamp(44px, 11vw, 64px);
     letter-spacing: -2px;
   }
   .slider-info {
-    margin-top: 12px;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 1.5px;
-    line-height: 1.7;
-    max-width: 260px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: 14px;
+    max-width: 240px;
   }
   .slider-right {
     width: 100%;
     height: 260px;
+    margin-top: 28px;
   }
-  .active-card {
-    width: 92%;
-    height: 240px;
-    border-radius: 16px;
+  .slide-card {
+    width: 86%;
+    border-radius: 14px;
   }
   .slider-nav {
-    bottom: 100px;
-    gap: 12px;
+    bottom: 18px;
+    gap: 10px;
   }
   .slider-nav button {
-    padding: 12px 24px;
+    padding: 11px 22px;
     font-size: 12px;
-    border-radius: 50px;
-    min-height: 44px;
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .slide-card,
+  .slide-card img,
+  .slider-title span,
+  .slider-nav button {
+    will-change: auto;
+    transition: none !important;
+  }
+}

@@ -1,20 +1,18 @@
 import { motion } from "framer-motion";
-import WorkSlider from "../components/WorkSlider";
 import Header from "../components/Header";
+import WorkSlider from "../components/WorkSlider";
 
 const Work = () => {
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6, ease: "easeInOut" }}
+    >
       <Header />
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -50 }}
-        transition={{ duration: 0.8 }}
-      >
-        <WorkSlider />
-      </motion.div>
-    </>
+      <WorkSlider />
+    </motion.div>
   );
 };
 

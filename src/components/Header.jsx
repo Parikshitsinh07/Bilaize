@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
    FaHome,
    FaFolder,
@@ -9,23 +9,26 @@ import MobileNav from "./MobileNav";
 import "../style/Header.css";
 
 const Header = () => {
+  const navClass = ({ isActive }) =>
+    isActive ? "nav-item nav-item--active" : "nav-item";
+
   return (
     <>
       <header className="header hidden md:block">
         <div className="top-line"></div>
         <nav className="nav-container">
-          <Link to="/" className="nav-item">
+          <NavLink to="/" end className={navClass}>
             <FaHome />
-          </Link>
-          <Link to="/work" className="nav-item">
+          </NavLink>
+          <NavLink to="/work" className={navClass}>
             <FaFolder />
-          </Link>
-          <Link to="/about" className="nav-item">
+          </NavLink>
+          <NavLink to="/about" className={navClass}>
             <FaUser />
-          </Link>
-          <Link to="/contact" className="nav-item">
+          </NavLink>
+          <NavLink to="/contact" className={navClass}>
             <FaComment />
-          </Link>
+          </NavLink>
         </nav>
       </header>
       <MobileNav />
@@ -34,4 +37,3 @@ const Header = () => {
 };
 
 export default Header;
-

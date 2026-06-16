@@ -11,8 +11,9 @@ const Navbar = () => {
         transition={{ delay: 3.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-0 left-0 w-full z-50 hidden md:block"
       >
-        <div className="flex justify-center items-center py-8">
-          <ul className="flex items-center gap-12 text-white uppercase tracking-widest font-medium">
+        <div style={{ height: "4px", background: "#b22222", width: "100%" }} />
+        <div className="flex items-center py-6 px-12 w-full">
+          <ul className="flex items-center justify-around w-full text-white uppercase tracking-widest font-medium">
             <li>
               <NavLink
                 to="/gallery"
