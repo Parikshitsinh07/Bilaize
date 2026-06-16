@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Inter", sans-serif;
+  --font-mono: "Inter", sans-serif;
+  --font-sans: "Inter", sans-serif;
+  --font-garamond: "Inter", sans-serif;
+}
+
+:root {
+  /* Colors */
+  --primary-color: #ff3b3b;
+  --secondary-color: #ffffff;
+  --dark-color: #000000;
+  --overlay-color: rgba(0, 0, 0, 0.4);
+
+  /* Typography */
+  --font-family: "Inter", sans-serif;
+
+  /* Transitions */
+  --transition: all 0.3s ease;
+
+  /* Container */
+  --container-width: 1400px;
+
+  /* Navbar */
+  --navbar-height: 90px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  overflow-x: hidden;
+  background: var(--dark-color);
+  color: #ffffff;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+body {
+  cursor: default;
+}
+
+/* --- Lenis Smooth Scroll Configuration --- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+

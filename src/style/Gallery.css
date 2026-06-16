@@ -1,0 +1,74 @@
+.gallery-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 120px 60px;
+  background: #f7f5f5;
+}
+
+.masonry-grid {
+  display: flex;
+  margin-left: -20px;
+  width: auto;
+}
+
+.masonry-column {
+  padding-left: 20px;
+  background-clip: padding-box;
+}
+
+.gallery-card {
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.gallery-card img {
+  width: 100%;
+  display: block;
+  transition: transform .6s ease;
+}
+
+.gallery-card:hover img {
+  transform: scale(1.05);
+}
+
+/* ── Skeleton shimmer loading card ── */
+.gallery-skeleton {
+  margin-bottom: 20px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    #e8e8e8 25%,
+    #f0f0f0 50%,
+    #e8e8e8 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (max-width: 767px) {
+  .gallery-page {
+    padding: 100px 16px 48px 16px;
+  }
+  /* Force single column masonry on mobile for better image viewing */
+  .masonry-grid {
+    flex-direction: column;
+    margin-left: 0;
+  }
+  .masonry-column {
+    padding-left: 0;
+    width: 100% !important;
+  }
+  .gallery-card {
+    margin-bottom: 16px;
+    border-radius: 6px;
+  }
+}
+
+

@@ -1,0 +1,70 @@
+/* ── Background layer — slides up into red navbar line ──────────────── */
+.splash-bg {
+  position: fixed;
+  inset: 0;
+  background: #b22222;       /* RED — matches navbar .top-line exactly */
+  z-index: 99998;
+  pointer-events: none;
+}
+
+/* ── Logo wrapper — OLD zoom-out animation ──────────────────────────── */
+.splash-logo-wrap {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* ── Logo box (floats) ──────────────────────────────────────────────── */
+.logo-box {
+  position: relative;
+  width: 900px;
+  max-width: 90%;
+}
+
+.logo-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* ── Base text — white ghost on red ─────────────────────────────────── */
+.logo-text-bg {
+  fill: rgba(255, 255, 255, 0.15);
+  font-size: 180px;
+  font-weight: 900;
+  letter-spacing: 10px;
+}
+
+/* ── Mask cut-out ────────────────────────────────────────────────────── */
+.logo-text-mask {
+  fill: white;
+  font-size: 180px;
+  font-weight: 900;
+  letter-spacing: 10px;
+}
+
+/* ── White water fill ────────────────────────────────────────────────── */
+.wave {
+  fill: #ffffff;
+}
+
+/* ── Noise texture ───────────────────────────────────────────────────── */
+.noise {
+  position: absolute;
+  inset: -100%;
+  opacity: 0.06;
+  background-image: radial-gradient(rgba(0,0,0,0.4) 1px, transparent 1px);
+  background-size: 4px 4px;
+  animation: noiseMove 10s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes noiseMove {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(-150px, -150px); }
+}

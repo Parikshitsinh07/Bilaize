@@ -1,0 +1,12 @@
+.slider-title {
+  font-size: clamp(90px, 8vw, 170px);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -6px;
+  overflow: hidden;
+}
+
+.slider-title span {
+  display: inline-block;
+  will-change: transform;
+}

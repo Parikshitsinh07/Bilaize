@@ -1,0 +1,95 @@
+/* ── Music Player ── */
+.music-player {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  z-index: 99999;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.music-player:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 6px rgba(255, 255, 255, 0.04);
+}
+
+.music-player:active {
+  cursor: grabbing;
+}
+
+/* ── Rotating dashed ring ── */
+.music-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+  transition: border-color 0.4s ease;
+}
+
+.music-player.playing .music-ring {
+  border-color: rgba(255, 60, 60, 0.6);
+  border-style: solid;
+}
+
+/* ── Icon ── */
+.music-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 20px;
+  will-change: transform;
+  transition: color 0.3s ease;
+  pointer-events: none;
+}
+
+.music-player.playing .music-icon {
+  color: #ff4444;
+}
+
+/* ── Pulse glow when playing ── */
+.music-player.playing {
+  animation: musicPulse 2s ease-in-out infinite;
+  border-color: rgba(255, 60, 60, 0.4);
+}
+
+@keyframes musicPulse {
+  0%, 100% {
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 0 0 0px rgba(255, 50, 50, 0.5);
+  }
+  50% {
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 0 0 14px rgba(255, 50, 50, 0);
+  }
+}
+
+/* ── Mobile touch friendly sizing ── */
+@media (max-width: 767px) {
+  .music-player {
+    width: 54px;
+    height: 54px;
+  }
+  .music-icon {
+    font-size: 18px;
+  }
+}

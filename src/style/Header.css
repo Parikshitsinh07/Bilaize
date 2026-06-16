@@ -1,0 +1,67 @@
+/* ── Header shell ───────────────────────────────────────────────────── */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background: #000;
+  border-bottom: 4px solid #fff;
+}
+
+/* ── Red accent line at very top ────────────────────────────────────── */
+.top-line {
+  height: 4px;
+  background: #b22222;
+}
+
+/* ── Icon nav row ───────────────────────────────────────────────────── */
+.nav-container {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
+}
+
+/* ── Each icon link ─────────────────────────────────────────────────── */
+.nav-item {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #9c9c9c;
+  font-size: 18px;
+  border-radius: 4px;
+  position: relative;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+/* Hover — lift + brighten */
+.nav-item:hover {
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ── ACTIVE state — red glow ─────────────────────────────────────────
+   Icon turns red with a subtle red drop-shadow glow
+   ────────────────────────────────────────────────────────────────── */
+.nav-item--active {
+  color: #e03030 !important;
+  filter: drop-shadow(0 0 8px rgba(224, 48, 48, 0.65));
+}
+
+/* Active also gets a tiny red underline dot */
+.nav-item--active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #e03030;
+  box-shadow: 0 0 6px rgba(224, 48, 48, 0.8);
+}

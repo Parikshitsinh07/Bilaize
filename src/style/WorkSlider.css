@@ -1,0 +1,220 @@
+/* =========================
+   MAIN SLIDER LAYOUT
+========================= */
+.slider {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 7vw;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, #f7f7f5, #ececec);
+}
+
+/* =========================
+   LEFT CONTENT
+========================= */
+.slider-left {
+  width: 40%;
+  z-index: 20;
+  flex-shrink: 0;
+}
+
+/* Title — GSAP manages the inner spans; this is the overflow wrapper */
+.slider-title {
+  font-size: clamp(80px, 9vw, 160px);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -6px;
+  color: #111;
+  overflow: hidden;
+  position: relative;
+  /* height is temporarily set by JS during animation — allow that */
+  min-height: 1em;
+}
+
+.slider-title span {
+  display: inline-block;
+  will-change: transform;
+}
+
+.slider-info {
+  margin-top: 32px;
+  max-width: 300px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.8;
+  font-size: 11px;
+}
+
+/* =========================
+   RIGHT — image container
+   GSAP positions each card absolutely
+   anchored at top:50% left:50% (via xPercent/yPercent: -50)
+========================= */
+.slider-right {
+  width: 58%;
+  height: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* =========================
+   SLIDE CARD BASE
+   GSAP sets: xPercent -50, yPercent -50, then x/y offsets
+   so top:50% left:50% is the anchor point for every card
+========================= */
+.slide-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* Base card dimensions — GSAP scale changes apparent size for ghosts */
+  width: min(560px, 52vw);
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.14), 0 4px 16px rgba(0, 0, 0, 0.06);
+  will-change: transform, filter, opacity;
+  contain: layout style;
+  /* cursor set per-card by JS */
+}
+
+.slide-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.92);
+  transition: transform 0.8s ease;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Subtle zoom on the active card hover */
+.slide-card[style*="cursor: pointer"]:hover img {
+  transform: scale(1.04);
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+.slider-nav {
+  position: absolute;
+  bottom: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  z-index: 30;
+}
+
+.slider-nav button {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #111;
+  padding: 13px 28px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  min-height: 44px;
+}
+
+.slider-nav button:hover {
+  background: #111;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 1400px) {
+  .slide-card { width: min(500px, 50vw); }
+  .slider-title { font-size: clamp(72px, 8vw, 130px); }
+}
+
+@media (max-width: 1200px) {
+  .slide-card { width: min(440px, 46vw); }
+}
+
+@media (max-width: 992px) {
+  .slider {
+    flex-direction: column;
+    justify-content: center;
+    padding: 110px 6vw 60px;
+    gap: 0;
+  }
+  .slider-left {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  .slider-info { margin-left: auto; margin-right: auto; }
+  .slider-right {
+    width: 100%;
+    height: 320px;
+    flex-shrink: 0;
+  }
+  .slide-card {
+    width: min(400px, 80vw);
+  }
+  .slider-title {
+    font-size: clamp(56px, 10vw, 90px);
+    letter-spacing: -4px;
+  }
+  .slider-nav { bottom: 20px; }
+}
+
+@media (max-width: 767px) {
+  .slider {
+    padding: 100px 5vw 70px;
+    gap: 0;
+  }
+  .slider-title {
+    font-size: clamp(44px, 11vw, 64px);
+    letter-spacing: -2px;
+  }
+  .slider-info {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-top: 14px;
+    max-width: 240px;
+  }
+  .slider-right {
+    width: 100%;
+    height: 260px;
+    margin-top: 28px;
+  }
+  .slide-card {
+    width: 86%;
+    border-radius: 14px;
+  }
+  .slider-nav {
+    bottom: 18px;
+    gap: 10px;
+  }
+  .slider-nav button {
+    padding: 11px 22px;
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-card,
+  .slide-card img,
+  .slider-title span,
+  .slider-nav button {
+    will-change: auto;
+    transition: none !important;
+  }
+}

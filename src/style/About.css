@@ -1,0 +1,194 @@
+.about-page {
+  background: #f7f5f5;
+  color: #111111;
+  min-height: 100vh;
+  padding-top: 100px;
+  padding-bottom: 80px;
+}
+
+.about-intro-badge {
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.about-title {
+  font-family: var(--font-garamond);
+  font-size: clamp(60px, 8vw, 120px);
+  font-weight: 300;
+  line-height: 1.0;
+  color: #111;
+  margin-bottom: 40px;
+}
+
+.about-description {
+  font-size: clamp(20px, 2.5vw, 28px);
+  line-height: 1.6;
+  font-weight: 400;
+  color: #222;
+  margin-bottom: 80px;
+  max-width: 900px;
+}
+
+.divider {
+  border-top: 1px solid #dcdcdc;
+  margin: 60px 0;
+}
+
+.about-section-heading {
+  font-family: var(--font-garamond);
+  font-size: 40px;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+@media (max-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.metric-label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.metric-value {
+  font-family: var(--font-garamond);
+  font-size: 32px;
+  font-weight: 400;
+  color: #111;
+}
+
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.experience-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+@media (max-width: 640px) {
+  .experience-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+.experience-years {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  font-family: "Inter", sans-serif;
+}
+
+.experience-detail h4 {
+  font-family: var(--font-garamond);
+  font-size: 24px;
+  font-weight: 500;
+  color: #111;
+}
+
+.experience-detail p {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.mantra-section {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.mantra-text {
+  font-family: var(--font-garamond);
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 300;
+  line-height: 1.3;
+  color: #111;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+  .about-page {
+    padding-top: 100px;
+    padding-bottom: 48px;
+  }
+  .about-intro-badge {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    margin-bottom: 16px;
+  }
+  .about-title {
+    font-size: clamp(40px, 10vw, 56px);
+    line-height: 1.0;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+  }
+  .about-description {
+    font-size: 17px;
+    line-height: 1.65;
+    margin-bottom: 40px;
+  }
+  .divider {
+    margin: 40px 0;
+  }
+  .about-section-heading {
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
+  .metrics-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .metric-item {
+    padding: 20px 0;
+  }
+  .metric-value {
+    font-size: 28px;
+  }
+  .experience-item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .experience-list {
+    gap: 24px;
+  }
+  .experience-detail h4 {
+    font-size: 22px;
+  }
+  .mantra-section {
+    padding: 56px 0;
+  }
+  .mantra-text {
+    font-size: clamp(22px, 6.5vw, 36px);
+    line-height: 1.35;
+  }
+}
+
