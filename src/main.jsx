@@ -5,15 +5,12 @@ import "@fontsource/inter";
 import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 
-// ── Remove the pre-React HTML splash once React is ready ──────────────────
-// We fade it out instead of instantly removing so the transition is smooth.
+// ── Remove the HTML pre-splash the INSTANT React mounts ──────────────
+// No animation here — React's <SplashScreen /> is already rendered on
+// top covering it, so the user never sees the swap. Silent removal.
 function dismissPreSplash() {
   const el = document.getElementById('pre-splash');
-  if (!el) return;
-  // Add .hide class → CSS transition fades it out (0.5s)
-  el.classList.add('hide');
-  // Remove from DOM after transition completes
-  setTimeout(() => el.remove(), 600);
+  if (el) el.remove(); // instant — no fade, no slide
 }
 
 createRoot(document.getElementById('root')).render(

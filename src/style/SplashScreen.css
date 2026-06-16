@@ -1,14 +1,25 @@
-.splash {
+/* ── Background layer — slides up into red navbar line ──────────────── */
+.splash-bg {
   position: fixed;
   inset: 0;
-  background: #000;
+  background: #b22222;       /* RED — matches navbar .top-line exactly */
+  z-index: 99998;
+  pointer-events: none;
+}
+
+/* ── Logo wrapper — OLD zoom-out animation ──────────────────────────── */
+.splash-logo-wrap {
+  position: fixed;
+  inset: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 99999;
+  pointer-events: none;
   overflow: hidden;
 }
 
+/* ── Logo box (floats) ──────────────────────────────────────────────── */
 .logo-box {
   position: relative;
   width: 900px;
@@ -21,13 +32,15 @@
   overflow: visible;
 }
 
+/* ── Base text — white ghost on red ─────────────────────────────────── */
 .logo-text-bg {
-  fill: #222;
+  fill: rgba(255, 255, 255, 0.15);
   font-size: 180px;
   font-weight: 900;
   letter-spacing: 10px;
 }
 
+/* ── Mask cut-out ────────────────────────────────────────────────────── */
 .logo-text-mask {
   fill: white;
   font-size: 180px;
@@ -35,50 +48,23 @@
   letter-spacing: 10px;
 }
 
+/* ── White water fill ────────────────────────────────────────────────── */
 .wave {
-  fill: #ff2d2d;
+  fill: #ffffff;
 }
 
-.wave2 {
-  fill: rgba(255, 80, 80, 0.35);
-}
-
-.wave-svg {
-  filter: drop-shadow(
-    0 0 30px rgba(255, 50, 50, 0.5)
-  );
-}
-
+/* ── Noise texture ───────────────────────────────────────────────────── */
 .noise {
   position: absolute;
   inset: -100%;
-  opacity: .05;
-  background-image: radial-gradient(#fff 1px, transparent 1px);
+  opacity: 0.06;
+  background-image: radial-gradient(rgba(0,0,0,0.4) 1px, transparent 1px);
   background-size: 4px 4px;
   animation: noiseMove 10s linear infinite;
   pointer-events: none;
 }
 
 @keyframes noiseMove {
-  from {
-    transform: translate(0,0);
-  }
-  to {
-    transform: translate(-150px,-150px);
-  }
-}
-
-.reflection {
-  position: absolute;
-  left: 50%;
-  top: 65%;
-  width: 700px;
-  height: 120px;
-  transform: translateX(-50%) rotateX(70deg);
-  background: radial-gradient(
-    circle,
-    rgba(255,50,50,.25),
-    transparent 70%
-  );
-  filter: blur(30px);
+  from { transform: translate(0, 0); }
+  to   { transform: translate(-150px, -150px); }
 }

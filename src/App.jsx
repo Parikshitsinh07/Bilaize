@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
 import SplashScreen from "./components/SplashScreen";
 import MusicPlayer from "./components/MusicPlayer";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -13,7 +13,11 @@ import WorkDetailsPage from "./pages/WorkDetailsPage";
 import CategoryProjectsPage from "./pages/CategoryProjectsPage";
 
 function App({ onReady }) {
-  const [splashDone, setSplashDone] = useState(false);
+  // ── Two gates — BOTH must be true before splash hides ───────────────
+  const [animationDone, setAnimationDone] = useState(false); // timer
+  const [pageReady,     setPageReady]     = useState(false); // window load
+  const [splashDone,    setSplashDone]    = useState(false); // final gate
+
   const location = useLocation();
 
   // ── Lenis smooth scroll ──────────────────────────────────────────────
@@ -23,45 +27,58 @@ function App({ onReady }) {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
-
     return () => lenis.destroy();
   }, []);
 
-  // ── Dismiss pre-React HTML splash as soon as React has painted ──────
-  // We do this on first render — React is alive, so the HTML splash
-  // can start fading out. The React SplashScreen takes over visually.
+  // ── Step 1: dismiss HTML pre-splash the instant React paints ────────
+  // React <SplashScreen /> is already rendered on top so user never
+  // sees the HTML version — no visual double-loading.
   useEffect(() => {
     if (onReady) onReady();
   }, [onReady]);
 
-  // ── React SplashScreen timing ────────────────────────────────────────
-  // Matches the animation: 2.9s delay + 1.3s scale = 4.2s total
+  // ── Step 2: animation minimum time gate ─────────────────────────────
+  // water fill (2.3s) + hold + exit (0.9s) = ~3.8s minimum
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setSplashDone(true);
-    }, 4300);
+    const timer = setTimeout(() => setAnimationDone(true), 3900);
     return () => clearTimeout(timer);
   }, []);
+
+  // ── Step 3: page fully loaded gate ──────────────────────────────────
+  // If all assets are already loaded (cached), resolve immediately.
+  // Otherwise wait for window.load event.
+  useEffect(() => {
+    if (document.readyState === "complete") {
+      setPageReady(true);
+    } else {
+      const onLoad = () => setPageReady(true);
+      window.addEventListener("load", onLoad, { once: true });
+      return () => window.removeEventListener("load", onLoad);
+    }
+  }, []);
+
+  // ── Final gate: only hide splash when BOTH conditions are met ────────
+  useEffect(() => {
+    if (animationDone && pageReady) {
+      setSplashDone(true);
+    }
+  }, [animationDone, pageReady]);
 
   return (
     <>
       {/* Floating music player — always visible */}
       <MusicPlayer />
 
-      {/* React SplashScreen — overlays content, then unmounts */}
+      {/* Splash — stays until animation done AND page loaded */}
       {!splashDone && <SplashScreen />}
 
-      {/* Main app — fades in while splash is still scaling */}
+      {/* Main app fades in while splash is still in its hold phase */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2.8, duration: 1.2 }}
+        transition={{ delay: 2.5, duration: 1.0 }}
         className="w-full min-h-screen"
       >
         <AnimatePresence mode="wait">
