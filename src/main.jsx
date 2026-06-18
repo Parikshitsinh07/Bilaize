@@ -16,12 +16,12 @@ function dismissPreSplash() {
   setTimeout(() => el.remove(), 600);
 }
 
-const redirect = sessionStorage.redirect;
+// const redirect = sessionStorage.redirect;
 
-if (redirect) {
-  sessionStorage.removeItem("redirect");
-  window.history.replaceState(null, null, redirect);
-}
+// if (redirect) {
+//   sessionStorage.removeItem("redirect");
+//   window.history.replaceState(null, null, redirect);
+// }
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
