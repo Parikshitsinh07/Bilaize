@@ -9,6 +9,7 @@
   color: #111;
   font-family: "Inter", sans-serif;
   overflow-x: hidden;
+   overflow-y: auto;
 }
 
 /* ── Fixed Top Nav Bar ── */
