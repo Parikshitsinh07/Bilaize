@@ -71,7 +71,7 @@ const WorkDetails = () => {
           onClick={() => navigate(`/work/${categorySlug}`)}
           aria-label={`Back to ${category?.title ?? "projects"}`}
         >
-          ← {category?.title ?? "Work"}
+          {category?.title ?? "Work"}
         </button>
       </header>
 
