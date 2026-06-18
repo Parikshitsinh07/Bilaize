@@ -38,7 +38,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; removed for Lenis compatibility */
 }
 
 body {
@@ -46,11 +46,15 @@ body {
   overflow-x: hidden;
   background: var(--dark-color);
   color: #ffffff;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
+  touch-action: manipulation;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 a {
@@ -86,8 +90,15 @@ html.lenis body {
   overscroll-behavior: contain;
 }
 
+/* lenis-stopped: only clip on desktop, allow touch scroll on mobile */
 .lenis.lenis-stopped {
-  overflow: hidden;
+  overflow: clip;
+}
+
+@media (max-width: 1024px) {
+  .lenis.lenis-stopped {
+    overflow: visible;
+  }
 }
 
 .lenis.lenis-smooth iframe {

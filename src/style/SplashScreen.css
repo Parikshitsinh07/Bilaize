@@ -82,3 +82,27 @@
   );
   filter: blur(30px);
 }
+
+/* ── Mobile responsive ── */
+@media (max-width: 767px) {
+  .logo-box {
+    width: 95%;
+  }
+  .logo-text-bg,
+  .logo-text-mask {
+    font-size: 100px;
+    letter-spacing: 4px;
+  }
+  .reflection {
+    width: 300px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 380px) {
+  .logo-text-bg,
+  .logo-text-mask {
+    font-size: 72px;
+    letter-spacing: 2px;
+  }
+}

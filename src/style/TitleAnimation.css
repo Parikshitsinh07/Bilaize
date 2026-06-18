@@ -10,3 +10,28 @@
   display: inline-block;
   will-change: transform;
 }
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .slider-title {
+    font-size: clamp(56px, 10vw, 90px);
+    letter-spacing: -4px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .slider-title {
+    font-size: clamp(36px, 11vw, 56px);
+    letter-spacing: -2px;
+    line-height: 1.0;
+  }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+  .slider-title {
+    font-size: clamp(28px, 10vw, 40px);
+    letter-spacing: -1px;
+  }
+}

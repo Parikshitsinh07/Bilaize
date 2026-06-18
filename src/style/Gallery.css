@@ -1,6 +1,7 @@
 .gallery-page {
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   padding: 120px 60px;
   background: #f7f5f5;
 }
