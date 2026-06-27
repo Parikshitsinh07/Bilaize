@@ -73,6 +73,7 @@ const WorkSlider = () => {
     img.src = categories[idx].cover;
     img.alt = categories[idx].title;
     img.draggable = false;
+    img.setAttribute("loading", "lazy");
     div.appendChild(img);
     return div;
   }

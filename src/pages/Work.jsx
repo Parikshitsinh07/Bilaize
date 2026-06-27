@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import Header from "../components/Header";
-import WorkSlider from "../components/WorkSlider";
+import WorkList from "../components/WorkList";
+import ClientShow from "../components/ClientShow";
+import Footer from "../components/Footer";
 
 const Work = () => {
   return (
@@ -11,7 +13,10 @@ const Work = () => {
       transition={{ duration: 0.6, ease: "easeInOut" }}
     >
       <Header />
-      <WorkSlider />
+      <WorkList />
+      <ClientShow />
+      <div className="h-24 md:h-36 bg-[#f7f5f5] w-full" /> {/* Large spacer between client and footer */}
+      <Footer />
     </motion.div>
   );
 };

@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import SplashScreen from "./components/SplashScreen";
 import MusicPlayer from "./components/MusicPlayer";
 import { Routes, Route, useLocation } from "react-router-dom";

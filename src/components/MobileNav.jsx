@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
-const MobileNav = ({ showBack = false }) => {
+const MobileNav = ({ showBack = false, backPath = "/work" }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -74,7 +74,7 @@ const MobileNav = ({ showBack = false }) => {
         {/* Left: logo or back */}
         {showBack ? (
           <Link
-            to="/work"
+            to={backPath}
             style={{
               color: "rgba(255,255,255,0.80)",
               display: "flex",

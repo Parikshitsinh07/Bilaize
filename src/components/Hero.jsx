@@ -4,7 +4,6 @@ import SplashScreen from "./SplashScreen";
 import "../style/Hero.css";
 
 const Hero = () => {
-  const [ripples, setRipples] = useState([]);
   const [videoLoaded, setVideoLoaded] = useState(false);
 
   // Minimum display time = 4300ms so SplashScreen always
@@ -33,19 +32,20 @@ const Hero = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.04,
-        delayChildren: 3.4,
+        staggerChildren: 0.1,
+        delayChildren: 5.3,
       },
     },
   };
 
   const charVariants = {
-    hidden: { y: "100%" },
+    hidden: { opacity: 0, filter: "blur(16px)" },
     visible: {
-      y: "0%",
+      opacity: 1,
+      filter: "blur(0px)",
       transition: {
-        duration: 0.8,
-        ease: [0.16, 1, 0.3, 1],
+        duration: 1.8,
+        ease: "easeOut",
       },
     },
   };
@@ -75,17 +75,6 @@ const Hero = () => {
       </div>
 
       <div className="hero-overlay"></div>
-
-      {ripples.map((ripple) => (
-        <span
-          key={ripple.id}
-          className="ripple"
-          style={{
-            left: `${ripple.x}px`,
-            top: `${ripple.y}px`,
-          }}
-        />
-      ))}
 
       <div className="hero-content">
         <motion.h1

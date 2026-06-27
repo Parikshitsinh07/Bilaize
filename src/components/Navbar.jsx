@@ -38,11 +38,11 @@ const Navbar = () => {
                 Work
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink to="/" className="text-4xl font-bold px-8">
                 Brielite
               </NavLink>
-            </li>
+            </li> */}
             <li>
               <NavLink
                 to="/about"

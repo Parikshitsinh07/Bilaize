@@ -1,12 +1,16 @@
 import { useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { worksDetails, categories } from "../data/works";
 import MobileNav from "./MobileNav";
+import Footer from "./Footer";
 import "../style/WorkDetails.css";
 
 const WorkDetails = () => {
   const { categorySlug, slug } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  const fromPage = location.state?.from; // "gallery" or "category"
 
   const project = worksDetails.find(
     (item) => item.slug === slug && item.categorySlug === categorySlug
@@ -68,14 +72,23 @@ const WorkDetails = () => {
       <header className="project-top-nav hidden md:flex">
         <button
           className="back-link-centered"
-          onClick={() => navigate(`/work/${categorySlug}`)}
-          aria-label={`Back to ${category?.title ?? "projects"}`}
+          onClick={() => {
+            if (fromPage === "gallery") {
+              navigate("/gallery");
+            } else {
+              navigate(`/work/${categorySlug}`);
+            }
+          }}
+          aria-label={fromPage === "gallery" ? "Back to Gallery" : `Back to ${category?.title ?? "projects"}`}
         >
-          {category?.title ?? "Work"}
+          {fromPage === "gallery" ? "Gallery" : (category?.title ?? "Work")}
         </button>
       </header>
 
-      <MobileNav showBack />
+      <MobileNav 
+        showBack 
+        backPath={fromPage === "gallery" ? "/gallery" : `/work/${categorySlug}`} 
+      />
 
       {/* Hero */}
       <div className="project-hero">
@@ -168,10 +181,7 @@ const WorkDetails = () => {
       )}
 
       {/* Footer */}
-      <footer className="project-footer">
-        <span className="footer-copy">© 2025 Brielite</span>
-        <Link to="/contact" className="footer-contact-link">Contact</Link>
-      </footer>
+      <Footer />
     </section>
   );
 };

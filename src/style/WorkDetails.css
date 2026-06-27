@@ -9,7 +9,18 @@
   color: #111;
   font-family: "Inter", sans-serif;
   overflow-x: hidden;
-   overflow-y: auto;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* ── Viewport Border Shading ── */
+.project-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+  z-index: 9999;
 }
 
 /* ── Fixed Top Nav Bar ── */
@@ -282,7 +293,7 @@
 }
 
 .other-work-link:hover {
-  color: #444;
+  color: #b22222;
   padding-left: 12px;
 }
 
@@ -306,8 +317,8 @@
 }
 
 .other-work-link:hover .other-work-link-arrow {
-  border-color: #111;
-  background: #111;
+  border-color: #b22222;
+  background: #b22222;
   color: #fff;
   transform: rotate(45deg);
 }
@@ -328,7 +339,7 @@
   transition: color 0.25s ease;
 }
 
-.other-works-all-link:hover { color: #111; }
+.other-works-all-link:hover { color: #b22222; }
 
 /* ── Footer ── */
 .project-footer {

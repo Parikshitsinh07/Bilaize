@@ -1,176 +1,286 @@
-.contact-page {
-  background: #f7f5f5;
+/* =====================================================================
+   CONTACT PAGE DESIGN (WHITE THEME / FULL PAGE COVER / UNDERLINE INPUTS)
+   ===================================================================== */
+
+.contact-page-v2 {
+  background: #ffffff;
   color: #111111;
   min-height: 100vh;
-  min-height: 100dvh;
-  padding-top: 120px;
-  padding-bottom: 80px;
+  padding: 160px 6% 120px 6%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-}
-
-.contact-container {
-  width: 90%;
-  max-width: 650px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.contact-title {
-  font-family: var(--font-garamond);
-  font-size: clamp(64px, 7vw, 110px);
-  font-weight: 300;
-  line-height: 1.0;
-  color: #111;
-  margin-bottom: 24px;
-}
-
-.contact-subtitle {
   font-family: "Inter", sans-serif;
-  font-size: 11px;
-  letter-spacing: 2px;
-  line-height: 1.6;
-  font-weight: 600;
-  color: #666;
-  text-transform: uppercase;
-  margin-bottom: 48px;
-  max-width: 450px;
+  width: 100%;
 }
 
-.contact-form {
+.contact-wrapper-v2 {
   width: 100%;
+  margin: 0 auto;
+}
+
+/* Giant Bold Title - Cover full width at top */
+.contact-main-title {
+  font-size: clamp(64px, 11vw, 226px);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -4px;
+  color: #000000;
+  margin-bottom: 90px;
+  text-align: left;
+  width: 100%;
+}
+
+.highlight-red {
+  color: #ff3b3b;
+}
+
+/* 2-Column Grid Layout - Full page spread */
+.contact-grid-v2 {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 10%;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* Left Column: Monospace/Clean details */
+.contact-info-col-v2 {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  text-align: left;
+  gap: 36px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 15px;
+  color: #111111;
+  line-height: 1.6;
 }
 
-.form-group {
+.contact-info-col-v2 a {
+  color: #111111;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.contact-info-col-v2 a:hover {
+  opacity: 0.7;
+}
+
+.contact-info-col-v2 .address-detail {
+  margin-top: 8px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* Right Column: Form Container */
+.contact-form-col-v2 {
+  width: 100%;
+}
+
+.minimal-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+/* Form Groups */
+.form-group-v2 {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Main labels: Name, Email, Phone, Message */
+.field-main-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111111;
+  font-family: "Inter", sans-serif;
+  letter-spacing: 0.5px;
+}
+
+/* Name row for First & Last Name */
+.name-inputs-row {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+}
+
+.name-field-sub {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.form-label {
-  font-family: "Inter", sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  color: #666;
-  text-transform: uppercase;
+/* Sub labels under Name group (First Name, Last Name) */
+.field-sub-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555555;
+  font-family: "Courier New", Courier, monospace;
 }
 
-.form-input,
-.form-textarea {
+/* Inputs & Textareas */
+.minimal-input,
+.minimal-textarea {
   width: 100%;
-  padding: 16px 20px;
-  background: #eaeaea;
+  background: transparent;
   border: none;
-  border-radius: 4px;
+  border-bottom: 1.5px solid #111111;
+  padding: 12px 0;
   font-family: "Inter", sans-serif;
-  font-size: 13px;
-  letter-spacing: 0.5px;
-  color: #111;
-  transition: background 0.3s ease;
+  font-size: 16px;
+  color: #ff3b3b;
+  border-radius: 0;
+  transition: border-color 0.25s ease;
 }
 
-.form-input:focus,
-.form-textarea:focus {
+.minimal-input:focus,
+.minimal-textarea:focus {
   outline: none;
-  background: #e2e2e2;
+  border-bottom-color: #ff3b3b;
 }
 
-.form-input::placeholder,
-.form-textarea::placeholder {
-  color: #888;
-  font-weight: 500;
-  text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 1px;
-}
-
-.form-textarea {
+.minimal-textarea {
   resize: vertical;
-  min-height: 150px;
+  min-height: 100px;
+  line-height: 1.6;
 }
 
-.submit-btn {
-  width: 100%;
-  padding: 18px;
-  background: #000000;
+/* Submit Action Button Row */
+.form-action-row {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.minimal-submit-btn {
+  background: #111111;
   color: #ffffff;
   border: none;
-  border-radius: 4px;
-  font-family: "Inter", sans-serif;
-  font-size: 12px;
+  padding: 16px 52px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  letter-spacing: 1px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  margin-top: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  transition: background-color 0.25s ease, transform 0.15s ease;
+  border-radius: 0;
 }
 
-.submit-btn:hover {
-  background: #222222;
+.minimal-submit-btn:hover {
+  background: #333333;
 }
 
-.submit-btn:active {
+.minimal-submit-btn:active {
   transform: scale(0.98);
 }
 
-@media (max-width: 767px) {
-  .contact-page {
-    padding-top: 100px;
-    padding-bottom: 48px;
-    justify-content: flex-start;
-  }
-  .contact-container {
-    width: 92%;
-    padding-top: 24px;
-  }
-  .contact-title {
-    font-size: clamp(40px, 10vw, 56px);
-    margin-bottom: 12px;
-    letter-spacing: -1px;
-  }
-  .contact-subtitle {
-    font-size: 10px;
-    margin-bottom: 32px;
-    letter-spacing: 1.5px;
-  }
-  .contact-form {
-    gap: 16px;
-  }
-  .form-label {
-    font-size: 10px;
-    letter-spacing: 1.5px;
-  }
-  /* iOS fix: font-size >= 16px prevents auto-zoom on focus */
-  .form-input,
-  .form-textarea {
-    padding: 16px;
-    font-size: 16px;
-    border-radius: 6px;
-  }
-  .form-textarea {
-    min-height: 130px;
-  }
-  /* Apple HIG: minimum 44px touch target */
-  .submit-btn {
-    padding: 16px;
-    font-size: 12px;
-    letter-spacing: 2px;
-    min-height: 52px;
-    border-radius: 6px;
-    margin-top: 8px;
+.minimal-submit-btn:disabled {
+  background: #888888;
+  cursor: not-allowed;
+}
+
+/* Status message styling */
+.form-status-msg {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 14px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.form-status-msg.success {
+  color: #2e7d32;
+}
+
+.form-status-msg.error {
+  color: #c62828;
+}
+
+/* =====================================================================
+   RESPONSIVE DESIGN / MEDIA QUERIES FOR ANY DEVICE
+   ===================================================================== */
+
+/* Big screens / Wide desktops */
+@media (min-width: 1600px) {
+  .contact-wrapper-v2 {
+    max-width: 1500px;
   }
 }
 
+/* Standard laptops */
+@media (max-width: 1200px) {
+  .contact-page-v2 {
+    padding-top: 140px;
+    padding-bottom: 100px;
+  }
+
+  .contact-main-title {
+    font-size: 110px;
+    margin-bottom: 70px;
+  }
+
+  .contact-grid-v2 {
+    gap: 6%;
+  }
+}
+
+/* Tablets (landscape and portrait) & small laptops */
+@media (max-width: 960px) {
+  .contact-page-v2 {
+    padding-top: 120px;
+    padding-bottom: 80px;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .contact-main-title {
+    font-size: 80px;
+    margin-bottom: 50px;
+  }
+
+  .contact-grid-v2 {
+    grid-template-columns: 1fr; /* Stack columns vertically */
+    gap: 60px;
+  }
+
+  .contact-info-col-v2 {
+    gap: 24px;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 580px) {
+  .contact-page-v2 {
+    padding-top: 100px;
+    padding-bottom: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .contact-main-title {
+    font-size: 52px;
+    margin-bottom: 40px;
+    letter-spacing: -2px;
+  }
+
+  .contact-grid-v2 {
+    gap: 40px;
+  }
+
+  .name-inputs-row {
+    flex-direction: column; /* Stack First Name & Last Name vertically */
+    gap: 24px;
+  }
+
+  .minimal-input,
+  .minimal-textarea {
+    font-size: 16px; /* Prevents auto-zoom on iOS */
+    padding: 8px 0;
+  }
+
+  .minimal-submit-btn {
+    width: 100%; /* Make button full width on small mobile screens */
+    padding: 16px;
+    font-size: 14px;
+    text-align: center;
+  }
+}

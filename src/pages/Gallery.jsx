@@ -1,20 +1,27 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import Masonry from "react-masonry-css";
 import "../style/Gallery.css";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { worksDetails } from "../data/works";
 
-const images = [
-  "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-  "https://images.unsplash.com/photo-1518837695005-2083093ee35b",
-  "https://images.unsplash.com/photo-1470770841072-f978cf4d019e",
-  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-  "https://images.unsplash.com/photo-1511300636408-a63a89df3482",
-  "https://images.unsplash.com/photo-1519681393784-d120267933ba",
-  "https://images.unsplash.com/photo-1441974231531-c6227db76b6e",
-];
+// Extract all images with metadata from worksDetails array
+const galleryItems = worksDetails.reduce((acc, project) => {
+  if (project.images) {
+    project.images.forEach((img, imgIdx) => {
+      acc.push({
+        src: img,
+        projectTitle: project.title,
+        categorySlug: project.categorySlug,
+        projectSlug: project.slug,
+        id: `${project.slug}-${imgIdx}`
+      });
+    });
+  }
+  return acc;
+}, []);
 
 const breakpointColumnsObj = {
   default: 4,
@@ -23,22 +30,55 @@ const breakpointColumnsObj = {
   500: 1,
 };
 
-/* Skeleton card — shimmer placeholder while images load */
-const SkeletonCard = ({ height }) => (
-  <div className="gallery-skeleton" style={{ height }} />
-);
+/* Individual Gallery Card with self-contained loading state */
+const GalleryCard = ({ item, index }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const heights = [260, 340, 200, 300, 250, 380, 220, 310];
+  const placeholderHeight = heights[index % heights.length];
 
-const skeletonHeights = [260, 340, 200, 300, 250, 380, 220, 310];
+  return (
+    <Link 
+      to={`/work/${item.categorySlug}/${item.projectSlug}`}
+      state={{ from: "gallery" }}
+      className="gallery-card"
+      style={{ display: "block", textDecoration: "none" }}
+    >
+      {!isLoaded && (
+        <div 
+          className="gallery-skeleton" 
+          style={{ 
+            height: placeholderHeight, 
+            width: "100%",
+            marginBottom: 0
+          }} 
+        />
+      )}
+      <div style={{ position: "relative", overflow: "hidden", borderRadius: "6px" }}>
+        <img
+          src={item.src}
+          alt={item.projectTitle}
+          loading="lazy"
+          onLoad={() => setIsLoaded(true)}
+          style={{
+            opacity: isLoaded ? 1 : 0,
+            transition: "opacity 0.4s ease, transform 0.65s cubic-bezier(0.25, 1, 0.5, 1)",
+            height: isLoaded ? "auto" : 0,
+            width: "100%",
+            display: "block"
+          }}
+        />
+        {isLoaded && (
+          <div className="gallery-card-overlay">
+            <h3 className="gallery-card-title">{item.projectTitle}</h3>
+            <span className="gallery-card-category">{item.categorySlug}</span>
+          </div>
+        )}
+      </div>
+    </Link>
+  );
+};
 
 const Gallery = () => {
-  const [loadedImages, setLoadedImages] = useState({});
-
-  const handleImageLoad = (index) => {
-    setLoadedImages((prev) => ({ ...prev, [index]: true }));
-  };
-
-  const allLoaded = Object.keys(loadedImages).length === images.length;
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
@@ -48,51 +88,21 @@ const Gallery = () => {
     >
       <Header />
       <div className="gallery-page">
+        <header className="gallery-header">
+          <span className="gallery-subtitle">Curated Gallery</span>
+          <h1 className="gallery-title">Capturing Spaces,<br />Facades & composition</h1>
+          <div className="gallery-divider" />
+        </header>
 
-        {/* Skeleton grid — shows while images are loading */}
-        <AnimatePresence>
-          {!allLoaded && (
-            <motion.div
-              key="skeleton"
-              initial={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              style={{ position: "absolute", inset: 0, paddingTop: "100px", padding: "100px 16px 40px" }}
-            >
-              <Masonry
-                breakpointCols={breakpointColumnsObj}
-                className="masonry-grid"
-                columnClassName="masonry-column"
-              >
-                {skeletonHeights.map((h, i) => (
-                  <SkeletonCard key={i} height={h} />
-                ))}
-              </Masonry>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Real images — hidden until loaded */}
         <Masonry
           breakpointCols={breakpointColumnsObj}
           className="masonry-grid"
           columnClassName="masonry-column"
         >
-          {images.map((img, index) => (
-            <div
-              key={index}
-              className="gallery-card"
-              style={{ opacity: loadedImages[index] ? 1 : 0, transition: "opacity 0.4s ease" }}
-            >
-              <img
-                src={img}
-                alt=""
-                onLoad={() => handleImageLoad(index)}
-              />
-            </div>
+          {galleryItems.map((item, index) => (
+            <GalleryCard key={item.id} item={item} index={index} />
           ))}
         </Masonry>
-
       </div>
       <Footer />
     </motion.div>

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { categories, works } from "../data/works";
 import MobileNav from "./MobileNav";
+import Footer from "./Footer";
 import "../style/CategoryProjects.css";
 
 const CategoryProjects = () => {
@@ -95,6 +96,7 @@ const CategoryProjects = () => {
               <Link
                 key={project.slug}
                 to={`/work/${categorySlug}/${project.slug}`}
+                state={{ from: "category" }}
                 className="cp-card"
                 aria-label={`Open ${project.title}`}
               >
@@ -132,10 +134,7 @@ const CategoryProjects = () => {
       </div>
 
       {/* ── Footer ── */}
-      <footer className="cp-footer">
-        <span className="cp-footer-copy">© 2025 Brielite</span>
-        <Link to="/contact" className="cp-footer-link">Contact</Link>
-      </footer>
+      <Footer />
     </motion.section>
   );
 };

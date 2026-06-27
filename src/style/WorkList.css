@@ -1,0 +1,237 @@
+/* =====================================================================
+   WORK LIST HOVER INTERACTION STYLING
+   ===================================================================== */
+
+.work-list-container {
+  width: 100%;
+  min-height: calc(100vh - 54px); /* offset header */
+  background: #f7f5f5; /* Light grey base as in other pages */
+  color: #111111;
+  position: relative;
+  overflow: hidden;
+  padding-top: 140px; /* increase top padding to give header breathing room */
+  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* change to start so flow is natural */
+  align-items: flex-start; /* align items to left */
+}
+
+/* --- Header Tagline --- */
+.work-list-header {
+  width: 100%;
+  padding: 0 6%;
+  margin-bottom: 60px;
+  text-align: left;
+}
+
+.work-header-eyebrow {
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: #666666;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.work-header-title {
+  font-family: var(--font-garamond);
+  font-size: clamp(38px, 5.5vw, 72px);
+  font-weight: 300;
+  line-height: 1.15;
+  color: #111111;
+  letter-spacing: -2px;
+}
+
+/* --- Desktop Layout --- */
+.work-desktop-list {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 6%;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.work-list-items {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.work-list-item {
+  display: flex;
+  align-items: center;
+  padding: 45px 0;
+  border-bottom: 1px solid #dcdcdc;
+  text-decoration: none;
+  color: #111111;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  z-index: 5;
+}
+
+.work-list-item:first-child {
+  border-top: 1px solid #dcdcdc;
+}
+
+.work-list-item:last-child {
+  border-bottom: none;
+}
+
+.item-number {
+  font-size: 11px;
+  font-weight: 700;
+  color: #888888;
+  margin-right: 60px;
+  letter-spacing: 2px;
+  font-family: "Inter", sans-serif;
+  width: 30px;
+}
+
+.item-text {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(48px, 6vw, 90px);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  line-height: 1;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+
+.item-arrow {
+  margin-left: auto;
+  opacity: 0;
+  transform: translateX(-20px) rotate(-45deg);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #ff3b3b;
+}
+
+/* Hover States */
+.work-list-item.active .item-text {
+  transform: translateX(20px);
+  color: #ff3b3b; /* Red accent on active hover */
+}
+
+.work-list-item.active .item-arrow {
+  opacity: 1;
+  transform: translateX(0) rotate(0deg);
+}
+
+.work-list-item.dimmed {
+  opacity: 0.15;
+}
+
+/* Floating Image Wrapper */
+.floating-image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 380px;
+  aspect-ratio: 4 / 3;
+  z-index: 2;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.22);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.floating-image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #e8e5e5;
+}
+
+.floating-image-el {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Mobile Grid Layout --- */
+.work-mobile-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: 100%;
+  padding: 20px 5%;
+  margin-top: 20px;
+}
+
+.work-mobile-card {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.work-mobile-card-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease;
+}
+
+.work-mobile-card:hover .work-mobile-card-bg {
+  transform: scale(1.05);
+}
+
+.work-mobile-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 65%, transparent 100%);
+  z-index: 1;
+}
+
+.work-mobile-card-content {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+}
+
+.work-mobile-num {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ff3b3b;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.work-mobile-title {
+  font-size: 28px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  margin: 0 0 6px 0;
+  line-height: 1.1;
+}
+
+.work-mobile-desc {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  max-width: 90%;
+  font-weight: 450;
+  line-height: 1.4;
+}
+
+@media (max-width: 1024px) {
+  .work-list-item {
+    padding: 35px 0;
+  }
+}

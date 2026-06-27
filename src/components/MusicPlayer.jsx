@@ -1,26 +1,23 @@
 import { useState, useRef, useEffect } from "react";
-import { FaMusic, FaPause } from "react-icons/fa";
 import "../style/Music.css";
 
-const SIZE = 60; // button diameter in px
+const WIDTH = 76;   // capsule width in px
+const HEIGHT = 42;  // capsule height in px
 
 const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
 
 const safeInitialPosition = () => ({
-  x: clamp(window.innerWidth  - SIZE - 16, 0, window.innerWidth  - SIZE),
-  y: clamp(window.innerHeight - SIZE - 16, 0, window.innerHeight - SIZE),
+  x: clamp(window.innerWidth  - WIDTH - 20, 0, window.innerWidth  - WIDTH),
+  y: clamp(window.innerHeight - HEIGHT - 20, 0, window.innerHeight - HEIGHT),
 });
 
 const MusicPlayer = () => {
   const [playing,  setPlaying]  = useState(false);
   const [position, setPosition] = useState(safeInitialPosition);
-  const [rotation, setRotation] = useState(0);
 
   const dragging      = useRef(false);
   const hasDragged    = useRef(false);
   const offset        = useRef({ x: 0, y: 0 });
-  const rafId         = useRef(null);
-  const rotRef        = useRef(0);
   const lastTouchEnd  = useRef(0); // ghost-click prevention
   const audioRef      = useRef(
     new Audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
@@ -34,27 +31,12 @@ const MusicPlayer = () => {
     return () => { audio.pause(); };
   }, []);
 
-  /* ── Smooth rotation loop ── */
-  useEffect(() => {
-    if (playing) {
-      const spin = () => {
-        rotRef.current = (rotRef.current + 0.4) % 360;
-        setRotation(rotRef.current);
-        rafId.current = requestAnimationFrame(spin);
-      };
-      rafId.current = requestAnimationFrame(spin);
-    } else {
-      cancelAnimationFrame(rafId.current);
-    }
-    return () => cancelAnimationFrame(rafId.current);
-  }, [playing]);
-
   /* ── Clamp position when window resizes ── */
   useEffect(() => {
     const onResize = () => {
       setPosition(prev => ({
-        x: clamp(prev.x, 0, window.innerWidth  - SIZE),
-        y: clamp(prev.y, 0, window.innerHeight - SIZE),
+        x: clamp(prev.x, 0, window.innerWidth  - WIDTH),
+        y: clamp(prev.y, 0, window.innerHeight - HEIGHT),
       }));
     };
     window.addEventListener("resize", onResize);
@@ -93,8 +75,8 @@ const MusicPlayer = () => {
       if (!dragging.current) return;
       hasDragged.current = true;
       setPosition({
-        x: clamp(e.clientX - offset.current.x, 0, window.innerWidth  - SIZE),
-        y: clamp(e.clientY - offset.current.y, 0, window.innerHeight - SIZE),
+        x: clamp(e.clientX - offset.current.x, 0, window.innerWidth  - WIDTH),
+        y: clamp(e.clientY - offset.current.y, 0, window.innerHeight - HEIGHT),
       });
     };
     const onMouseUp = () => { dragging.current = false; };
@@ -124,8 +106,8 @@ const MusicPlayer = () => {
     hasDragged.current = true;
     const t = e.touches[0];
     setPosition({
-      x: clamp(t.clientX - offset.current.x, 0, window.innerWidth  - SIZE),
-      y: clamp(t.clientY - offset.current.y, 0, window.innerHeight - SIZE),
+      x: clamp(t.clientX - offset.current.x, 0, window.innerWidth  - WIDTH),
+      y: clamp(t.clientY - offset.current.y, 0, window.innerHeight - HEIGHT),
     });
   };
 
@@ -147,14 +129,11 @@ const MusicPlayer = () => {
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-      {/* Rotating ring */}
-      <div
-        className="music-ring"
-        style={{ transform: `rotate(${rotation}deg)` }}
-      />
-      {/* Icon */}
-      <div className="music-icon">
-        {playing ? <FaPause /> : <FaMusic />}
+      {/* Soundwave Icon */}
+      <div className="soundwave-container">
+        {[...Array(11)].map((_, i) => (
+          <div key={i} className={`soundwave-bar bar-${i + 1}`} />
+        ))}
       </div>
     </div>
   );
