@@ -35,6 +35,11 @@ function App({ onReady }) {
     return () => lenis.destroy();
   }, []);
 
+  // ── Scroll to top on route change ────────────────────────────────────
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [location.pathname]);
+
   // ── Dismiss pre-React HTML splash as soon as React has painted ──────
   // We do this on first render — React is alive, so the HTML splash
   // can start fading out. The React SplashScreen takes over visually.

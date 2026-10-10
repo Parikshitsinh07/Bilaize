@@ -40,7 +40,7 @@ import kesar7 from "../assets/Interior-optimized/Kesar Hill/DSC04153-HDR.webp";
 import kesar8 from "../assets/Interior-optimized/Kesar Hill/DSC04158-HDR.webp";
 
 // ── CATEGORIES ─────────────────────────────────────────────────────────────
-export const categories = [
+export let categories = [
   {
     slug: "architecture",
     title: "Architecture",
@@ -76,7 +76,7 @@ export const categories = [
 ];
 
 // ── PROJECTS (each belongs to a category) ───────────────────────────────────
-export const works = [
+export let works = [
   {
     slug: "aer",
     categorySlug: "architecture",
@@ -144,7 +144,7 @@ export const works = [
 ];
 
 // ── PROJECT DETAILS ──────────────────────────────────────────────────────────
-export const worksDetails = [
+export let worksDetails = [
   {
     slug: "aer",
     categorySlug: "architecture",

@@ -128,9 +128,21 @@ const WorkDetails = () => {
       </div>
 
       {/* Gallery */}
-      {galleryRows.length > 0 && (
+      {(galleryRows.length > 0 || project.video) && (
         <div className="project-gallery-container">
           <div className="gallery-grid">
+            <div className="gallery-row single">
+              <div className="gallery-video-wrapper" style={{ width: "100%" }}>
+                <video
+                  src={project.video || "https://www.w3schools.com/html/mov_bbb.mp4"}
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  style={{ width: "100%", display: "block" }}
+                />
+              </div>
+            </div>
             {galleryRows.map((row, rowIdx) => (
               <div key={rowIdx} className={`gallery-row ${row.type}`}>
                 {row.images.map((img, imgIdx) => (
